@@ -20,6 +20,9 @@
               <li class="nav-item">
                 {{ Auth::user()->role }}
               </li>
+              <li class="nav-item">
+                <a href="{{ url('admin') }}">Go to Admin</a>
+              </li>
             </ul>
           </div>
         </div>

@@ -11,6 +11,8 @@ class Kriteria extends Model
 
     protected $table = 'kriteria';
 
+    protected $fillable = ['code', 'name', 'description', 'type', 'bobot'];
+
     public function subkriteria()
     {
         return $this->hasMany(Subkriteria::class);

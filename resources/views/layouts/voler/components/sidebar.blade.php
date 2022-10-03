@@ -6,25 +6,34 @@
     <div class="sidebar-menu">
       <ul class="menu">
         <li class="sidebar-item active ">
-          <a href="index.html" class='sidebar-link'>
+          <a href="{{ url('admin') }}" class='sidebar-link'>
             <i data-feather="home" width="20"></i>
-            <span>Dashboard</span>
+            <span>Halaman Utama</span>
           </a>
         </li>
+
+        <li class="sidebar-item  has-sub">
+          <a href="#" class='sidebar-link'>
+            <i data-feather="package" width="20"></i>
+            <span>Olah Data</span>
+          </a>
+          <ul class="submenu ">
+            <li><a href="{{ route('kriteria.index') }}">Kriteria</a></li>
+            <li><a href="{{ route('subkriteria.index') }}">Subkriteria</a></li>
+            <li><a href="component-breadcrumb.html">Alternatif</a></li>
+            <li><a href="component-buttons.html">Nilai Bobot</a></li>
+          </ul>
+        </li>
         
-        <li class='sidebar-title'>Menu Metode</li>
+        <li class='sidebar-title'>Hasil Perhitungan</li>
         <li class="sidebar-item  has-sub">
           <a href="#" class='sidebar-link'>
             <i data-feather="package" width="20"></i>
             <span>Metode SAW</span>
           </a>
           <ul class="submenu ">
-            <li><a href="component-alert.html">Kriteria</a></li>
-            <li><a href="component-badge.html">Subkriteria</a></li>
-            <li><a href="component-breadcrumb.html">Alternatif</a></li>
-            <li><a href="component-buttons.html">Nilai Bobot</a></li>
-            <li><a href="component-card.html">Normalisasi</a></li>
-            <li><a href="component-card.html">Hasil</a></li>
+            <li><a href="component.html">Matriks Ternormalisasi (R)</a></li>
+            <li><a href="component-badge.html">Hasil</a></li>
           </ul>
         </li>
         <li class="sidebar-item  has-sub">
@@ -33,10 +42,6 @@
             <span>Metode WP</span>
           </a>
           <ul class="submenu ">
-            <li><a href="component-alert.html">Kriteria</a></li>
-            <li><a href="component-badge.html">Subkriteria</a></li>
-            <li><a href="component-breadcrumb.html">Alternatif</a></li>
-            <li><a href="component-buttons.html">Nilai Bobot</a></li>
             <li><a href="component-card.html">Vektor S dan V</a></li>
             <li><a href="component-card.html">Hasil</a></li>
           </ul>

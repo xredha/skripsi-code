@@ -24,7 +24,7 @@ class CreateKriteriaTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE kriteria ADD CONSTRAINT check_bobot_value CHECK (bobot >= 1 AND bobot <= 5);');
+        DB::statement('ALTER TABLE kriteria ADD CONSTRAINT check_bobot_value CHECK (bobot >= 1 AND bobot <= 10);');
     }
 
     /**

@@ -16,13 +16,13 @@ class CreateSubkriteriaTable extends Migration
     {
         Schema::create('subkriteria', function (Blueprint $table) {
             $table->id();
-            $table->integer('range');
+            $table->string('range');
             $table->float('nilai');
             $table->integer('id_kriteria');
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE subkriteria ADD CONSTRAINT check_nilai_value CHECK (nilai >= 1 AND nilai <= 10);');
+        DB::statement('ALTER TABLE subkriteria ADD CONSTRAINT check_nilai_value CHECK (nilai >= 1 AND nilai <= 5);');
     }
 
     /**

@@ -11,6 +11,8 @@ class Subkriteria extends Model
 
     protected $table = 'subkriteria';
 
+    protected $fillable = ['range', 'nilai', 'id_kriteria'];
+
     public function kriteria()
     {
         return $this->belongsTo(Kriteria::class);

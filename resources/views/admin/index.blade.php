@@ -1,5 +1,9 @@
 @extends('layouts.voler.master')
 
+@section('title')
+  <h3>Judul Dashboard</h3>
+@endsection
+
 @section('content')
-  <p>Test Halaman admin</p>
+  <p>Dashboard</p>
 @endsection
