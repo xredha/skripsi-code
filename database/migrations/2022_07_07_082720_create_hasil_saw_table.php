@@ -16,7 +16,7 @@ class CreateHasilSawTable extends Migration
         Schema::create('hasil_saw', function (Blueprint $table) {
             $table->id();
             $table->float('v');
-            $table->integer('id_alternatif');
+            $table->integer('alternatif_id');
             $table->timestamps();
         });
     }

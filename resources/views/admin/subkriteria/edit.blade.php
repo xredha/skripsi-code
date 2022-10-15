@@ -8,7 +8,7 @@
   <section class="header-menu">
     <div class="card m-0 border border-bottom-0 shadow-none">
       <div class="card-body d-flex align-items-center justify-content-between">
-        <p class="m-0">Tambah Subkriteria</p>
+        <p class="m-0">Edit Subkriteria</p>
         <a href="{{ route('subkriteria.index') }}"><button class="btn btn-secondary">Kembali</button></a>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="card m-0 border shadow-none">
           <div class="card-content">
             <div class="card-body">
-              @livewire('form.subkriteria.create')
+              @livewire('form.subkriteria.edit', ['kriteriaId' => $kriteriaId], key('subkriteria-edit' . $kriteriaId))
             </div>
           </div>
         </div>

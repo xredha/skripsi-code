@@ -1,7 +1,7 @@
 <div id="sidebar" class='active'>
   <div class="sidebar-wrapper active">
     <div class="sidebar-header text-center">
-      <h2>SPK SAHAM</h2>
+      <h2>SPK</h2>
     </div>
     <div class="sidebar-menu">
       <ul class="menu">

@@ -11,7 +11,7 @@ class KriteriaController extends Controller
     public function index()
     {
         $allKriteria = Kriteria::all();
-        return view('admin.kriteria.index', ['allKriteria' => $allKriteria]);
+        return view('admin.kriteria.index', compact('allKriteria'));
     }
 
     public function create()

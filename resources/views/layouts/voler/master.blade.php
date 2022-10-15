@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('voler/assets/css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
   <link rel="shortcut icon" href="{{ asset('voler/assets/images/favicon.svg') }}" type="image/x-icon">
+  @livewireStyles
 </head>
 
 <body>
@@ -43,6 +44,7 @@
   <script src="{{ asset('voler/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ asset('voler/assets/js/pages/dashboard.js') }}"></script>
   <script src="{{ asset('voler/assets/js/main.js') }}"></script>
+  @livewireScripts
 </body>
 
 </html>

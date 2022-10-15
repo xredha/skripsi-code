@@ -31,24 +31,15 @@
       <tbody class="bg-white">
         @foreach ($allSubkriteria as $subkriteria)
           <tr>
+            <td>{{ $subkriteria->name }}</td>
             <td>{{ $subkriteria->range }}</td>
-            <td>{{ $subkriteria->bobot }}</td>
+            <td>{{ $subkriteria->nilai }}</td>
             <td>
               <div class="d-flex justify-content-around">
-                {{-- Update --}}
-                <a href="{{ route('subkriteria.edit', $subkriteria->id) }}" class="me-3">
-                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
+                <a href="{{ route('subkriteria.edit', $subkriteria->kriteria_id) }}" class="me-3">
+                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="settings"></i>Ubah /
+                  Hapus
                 </a>
-                {{-- Delete --}}
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                  action="{{ route('subkriteria.destroy', $subkriteria->id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-
-                  <button type="submit" class="bg-transparent border-0 text-danger">
-                    <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
-                  </button>
-                </form>
               </div>
             </td>
           </tr>

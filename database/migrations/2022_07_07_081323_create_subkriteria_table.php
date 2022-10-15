@@ -18,8 +18,10 @@ class CreateSubkriteriaTable extends Migration
             $table->id();
             $table->string('range');
             $table->float('nilai');
-            $table->integer('id_kriteria');
+            $table->integer('kriteria_id');
             $table->timestamps();
+
+            $table->unique(['nilai', 'kriteria_id'], 'nilai_kriteria_id_unique');
         });
 
         DB::statement('ALTER TABLE subkriteria ADD CONSTRAINT check_nilai_value CHECK (nilai >= 1 AND nilai <= 5);');

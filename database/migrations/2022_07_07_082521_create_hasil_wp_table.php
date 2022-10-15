@@ -17,7 +17,7 @@ class CreateHasilWpTable extends Migration
             $table->id();
             $table->float('s');
             $table->float('v');
-            $table->integer('id_alternatif');
+            $table->integer('alternatif_id');
             $table->timestamps();
         });
     }

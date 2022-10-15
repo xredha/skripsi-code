@@ -10,8 +10,13 @@ class SubkriteriaController extends Controller
 {
     public function index()
     {
-        $allSubkriteria = Subkriteria::all();
-        return view('admin.subkriteria.index', ['allSubkriteria' => $allSubkriteria]);
+        $allSubkriteria = DB::table('subkriteria')
+                            ->join('kriteria', 'subkriteria.kriteria_id', '=', 'kriteria.id')
+                            ->select('subkriteria.*', 'kriteria.name')
+                            ->orderBy('subkriteria.kriteria_id')
+                            ->orderBy('nilai')
+                            ->get();
+        return view('admin.subkriteria.index', compact('allSubkriteria'));
     }
 
     public function create()
@@ -19,32 +24,8 @@ class SubkriteriaController extends Controller
         return view('admin.subkriteria.create');
     }
 
-    public function store(Request $request)
+    public function edit($kriteriaId)
     {
-        // $this->validate($request, [
-        //     'range' => 'required|string',
-        //     'nilai' => 'required',
-        // ]);
-
-        // $subkriteria = Subkriteria::create([
-        //     'range' => $request->range,
-        //     'nilai' => $request->nilai,
-        //     'id_kriteria' => 
-        // ]);
-
-        // if ($subkriteria) {
-        //     return redirect()
-        //         ->route('subkriteria.index')
-        //         ->with([
-        //             'success' => 'New subkriteria has been created successfully'
-        //         ]);
-        // } else {
-        //     return redirect()
-        //         ->back()
-        //         ->withInput()
-        //         ->with([
-        //             'error' => 'Some problem occurred, please try again'
-        //         ]);
-        // }
+        return view('admin.subkriteria.edit', ['kriteriaId' => $kriteriaId]);
     }
 }

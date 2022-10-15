@@ -16,10 +16,11 @@ class CreateNilaiBobotTable extends Migration
         Schema::create('nilai_bobot', function (Blueprint $table) {
             $table->id();
             $table->float('nilai');
-            $table->integer('id_kriteria');
-            $table->integer('id_alternatif');
-            $table->unique(['id_kriteria', 'id_alternatif']);
+            $table->integer('kriteria_id');
+            $table->integer('alternatif_id');
             $table->timestamps();
+
+            $table->unique(['kriteria_id', 'alternatif_id'], 'kriteria_id_alternatif_id_unique');
         });
     }
 

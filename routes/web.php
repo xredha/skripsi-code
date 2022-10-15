@@ -43,9 +43,9 @@ Route::prefix('admin')->group(function() {
     Route::prefix('subkriteria')->group(function() {
         Route::get('/', [SubkriteriaController::class, 'index'])->name('subkriteria.index');
         Route::get('/create', [SubkriteriaController::class, 'create'])->name('subkriteria.create');
-        Route::post('/', [SubkriteriaController::class, 'store'])->name('subkriteria.store');
-        Route::get('/{id}/edit', [SubkriteriaController::class, 'edit'])->name('subkriteria.edit');
-        Route::put('/{id}', [SubkriteriaController::class, 'update'])->name('subkriteria.update');
-        Route::delete('/{id}', [SubkriteriaController::class, 'destroy'])->name('subkriteria.destroy');
+        // Route::post('/', [SubkriteriaController::class, 'store'])->name('subkriteria.store');
+        Route::get('/{kriteria_id}/edit', [SubkriteriaController::class, 'edit'])->name('subkriteria.edit');
+        // Route::put('/{id}', [SubkriteriaController::class, 'update'])->name('subkriteria.update');
+        // Route::delete('/{id}', [SubkriteriaController::class, 'destroy'])->name('subkriteria.destroy');
     });
 });
