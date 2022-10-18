@@ -11,6 +11,8 @@ class Alternatif extends Model
 
     protected $table = 'alternatif';
 
+    protected $fillable = ['code', 'code_saham', 'name_saham'];
+
     public function nilaiBobot()
     {
         return $this->hasMany(NilaiBobot::class);

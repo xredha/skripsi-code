@@ -31,7 +31,7 @@
       <tbody class="bg-white">
         @foreach ($allSubkriteria as $subkriteria)
           <tr>
-            <td>{{ $subkriteria->name }}</td>
+            <td>{{ strtoupper($subkriteria->name) }}</td>
             <td>{{ $subkriteria->range }}</td>
             <td>{{ $subkriteria->nilai }}</td>
             <td>

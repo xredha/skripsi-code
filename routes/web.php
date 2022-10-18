@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
@@ -47,5 +48,14 @@ Route::prefix('admin')->group(function() {
         Route::get('/{kriteria_id}/edit', [SubkriteriaController::class, 'edit'])->name('subkriteria.edit');
         // Route::put('/{id}', [SubkriteriaController::class, 'update'])->name('subkriteria.update');
         // Route::delete('/{id}', [SubkriteriaController::class, 'destroy'])->name('subkriteria.destroy');
+    });
+
+    Route::prefix('alternatif')->group(function() {
+        Route::get('/', [AlternatifController::class, 'index'])->name('alternatif.index');
+        Route::get('/create', [AlternatifController::class, 'create'])->name('alternatif.create');
+        Route::post('/', [AlternatifController::class, 'store'])->name('alternatif.store');
+        Route::get('/{id}/edit', [AlternatifController::class, 'edit'])->name('alternatif.edit');
+        Route::put('/{id}', [AlternatifController::class, 'update'])->name('alternatif.update');
+        Route::delete('/{id}', [AlternatifController::class, 'destroy'])->name('alternatif.destroy');
     });
 });

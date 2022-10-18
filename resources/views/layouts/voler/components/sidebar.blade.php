@@ -20,7 +20,7 @@
           <ul class="submenu ">
             <li><a href="{{ route('kriteria.index') }}">Kriteria</a></li>
             <li><a href="{{ route('subkriteria.index') }}">Subkriteria</a></li>
-            <li><a href="component-breadcrumb.html">Alternatif</a></li>
+            <li><a href="{{ route('alternatif.index') }}">Alternatif</a></li>
             <li><a href="component-buttons.html">Nilai Bobot</a></li>
           </ul>
         </li>
