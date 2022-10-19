@@ -11,6 +11,8 @@ class NilaiBobot extends Model
 
     protected $table = 'nilai_bobot';
 
+    protected $fillable = ['nilai', 'kriteria_id', 'alternatif_id'];
+
     public function kriteria()
     {
         return $this->belongsTo(Kriteria::class);

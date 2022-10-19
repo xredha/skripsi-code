@@ -4,6 +4,7 @@ use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\NilaiBobotController;
 use App\Http\Controllers\SubkriteriaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,5 +58,13 @@ Route::prefix('admin')->group(function() {
         Route::get('/{id}/edit', [AlternatifController::class, 'edit'])->name('alternatif.edit');
         Route::put('/{id}', [AlternatifController::class, 'update'])->name('alternatif.update');
         Route::delete('/{id}', [AlternatifController::class, 'destroy'])->name('alternatif.destroy');
+    });
+
+    Route::prefix('nilai-bobot')->group(function() {
+        Route::get('/', [NilaiBobotController::class, 'index'])->name('nilai-bobot.index');
+        Route::get('/create', [NilaiBobotController::class, 'create'])->name('nilai-bobot.create');
+        Route::post('/', [NilaiBobotController::class, 'store'])->name('nilai-bobot.store');
+        Route::get('/{alternatif_id}/edit', [NilaiBobotController::class, 'edit'])->name('nilai-bobot.edit');
+        Route::put('/{alternatif_id}', [NilaiBobotController::class, 'update'])->name('nilai-bobot.update');
     });
 });
