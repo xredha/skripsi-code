@@ -11,12 +11,12 @@ class KriteriaController extends Controller
     public function index()
     {
         $allKriteria = Kriteria::all();
-        return view('admin.kriteria.index', compact('allKriteria'));
+        return view('dashboard.kriteria.index', compact('allKriteria'));
     }
 
     public function create()
     {
-        return view('admin.kriteria.create');
+        return view('dashboard.kriteria.create');
     }
 
     public function store(Request $request)
@@ -59,7 +59,7 @@ class KriteriaController extends Controller
     public function edit($id)
     {
         $kriteria = Kriteria::findOrFail($id);
-        return view('admin.kriteria.edit', compact('kriteria'));
+        return view('dashboard.kriteria.edit', compact('kriteria'));
     }
 
     public function update(Request $request, $id)

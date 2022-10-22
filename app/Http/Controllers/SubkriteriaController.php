@@ -16,16 +16,16 @@ class SubkriteriaController extends Controller
                             ->orderBy('subkriteria.kriteria_id')
                             ->orderBy('nilai')
                             ->get();
-        return view('admin.subkriteria.index', compact('allSubkriteria'));
+        return view('dashboard.subkriteria.index', compact('allSubkriteria'));
     }
 
     public function create()
     {
-        return view('admin.subkriteria.create');
+        return view('dashboard.subkriteria.create');
     }
 
     public function edit($kriteriaId)
     {
-        return view('admin.subkriteria.edit', ['kriteriaId' => $kriteriaId]);
+        return view('dashboard.subkriteria.edit', ['kriteriaId' => $kriteriaId]);
     }
 }

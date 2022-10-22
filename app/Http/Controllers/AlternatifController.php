@@ -11,12 +11,12 @@ class AlternatifController extends Controller
     public function index()
     {
         $allAlternatif = Alternatif::all();
-        return view('admin.alternatif.index', compact('allAlternatif'));
+        return view('dashboard.alternatif.index', compact('allAlternatif'));
     }
 
     public function create()
     {
-        return view('admin.alternatif.create');
+        return view('dashboard.alternatif.create');
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class AlternatifController extends Controller
     public function edit($id)
     {
         $alternatif = Alternatif::findOrFail($id);
-        return view('admin.alternatif.edit', compact('alternatif'));
+        return view('dashboard.alternatif.edit', compact('alternatif'));
     }
 
     public function update(Request $request, $id)

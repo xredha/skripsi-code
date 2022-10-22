@@ -22,7 +22,7 @@ class NilaiBobotController extends Controller
             ->groupBy('alternatif.id')
             ->get();
 
-        return view('admin.nilai_bobot.index', compact('allKriteria', 'allNilaiBobot', 'nilaiBobotGroupByAlternatifId'));
+        return view('dashboard.nilai_bobot.index', compact('allKriteria', 'allNilaiBobot', 'nilaiBobotGroupByAlternatifId'));
     }
 
     public function create()
@@ -30,7 +30,7 @@ class NilaiBobotController extends Controller
         $allKriteria = Kriteria::all();
         $allSubkriteria = Subkriteria::all();
         $allAlternatif = Alternatif::all();
-        return view('admin.nilai_bobot.create', compact('allKriteria', 'allSubkriteria', 'allAlternatif'));
+        return view('dashboard.nilai_bobot.create', compact('allKriteria', 'allSubkriteria', 'allAlternatif'));
     }
 
     public function store(Request $request)
@@ -68,7 +68,7 @@ class NilaiBobotController extends Controller
         $allSubkriteria = Subkriteria::all();
         // dd($selectedAlternatif);
 
-        return view('admin.nilai_bobot.edit', compact('selectedAlternatif', 'allSubkriteria'));
+        return view('dashboard.nilai_bobot.edit', compact('selectedAlternatif', 'allSubkriteria'));
     }
 
     public function update(Request $request, $alternatifId)
