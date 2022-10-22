@@ -32,8 +32,8 @@
             <span>Metode SAW</span>
           </a>
           <ul class="submenu ">
-            <li><a href="component.html">Matriks Ternormalisasi (R)</a></li>
-            <li><a href="component-badge.html">Hasil</a></li>
+            <li><a href="{{ route('saw.index') }}">Matriks Ternormalisasi (R)</a></li>
+            <li><a href="{{ route('saw.hasil') }}">Hasil</a></li>
           </ul>
         </li>
         <li class="sidebar-item  has-sub">
@@ -42,8 +42,8 @@
             <span>Metode WP</span>
           </a>
           <ul class="submenu ">
-            <li><a href="component-card.html">Vektor S dan V</a></li>
-            <li><a href="component-card.html">Hasil</a></li>
+            <li><a href="{{ route('wp.index') }}">Vektor S dan V</a></li>
+            <li><a href="{{ route('wp.hasil') }}">Hasil</a></li>
           </ul>
         </li>
 
@@ -65,9 +65,7 @@
             <span>Pengguna</span>
           </a>
           <ul class="submenu ">
-            <li><a href="auth-login.html">Login</a></li>
-            <li><a href="auth-register.html">Register</a></li>
-            <li><a href="auth-forgot-password.html">Forgot Password</a></li>
+            <li><a href="auth-login.html">Olah Data User</a></li>
           </ul>
         </li>
 

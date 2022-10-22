@@ -1,4 +1,4 @@
-@extends('layouts.dasboard.master')
+@extends('layouts.dashboard.master')
 
 @section('title')
   <h4>Alternatif</h4>

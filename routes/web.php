@@ -4,6 +4,8 @@ use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HasilSAWController;
+use App\Http\Controllers\HasilWPController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\NilaiBobotController;
@@ -70,6 +72,16 @@ Route::prefix('admin')->group(function() {
         Route::post('/', [NilaiBobotController::class, 'store'])->name('nilai-bobot.store');
         Route::get('/{alternatif_id}/edit', [NilaiBobotController::class, 'edit'])->name('nilai-bobot.edit');
         Route::put('/{alternatif_id}', [NilaiBobotController::class, 'update'])->name('nilai-bobot.update');
+    });
+
+    Route::prefix('wp')->group(function() {
+        Route::get('/', [HasilWPController::class, 'index'])->name('wp.index');
+        Route::get('/hasil', [HasilWPController::class, 'hasil'])->name('wp.hasil');
+    });
+
+    Route::prefix('saw')->group(function() {
+        Route::get('/', [HasilSAWController::class, 'index'])->name('saw.index');
+        Route::get('/hasil', [HasilSAWController::class, 'hasil'])->name('saw.hasil');
     });
 });
 

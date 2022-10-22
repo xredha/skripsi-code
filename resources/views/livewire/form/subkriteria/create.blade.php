@@ -7,7 +7,7 @@
           <select class="form-select" id="kriteria" name="kriteria" wire:model="selectedKriteria">
             <option value="" selected>Pilih Kriteria...</option>
             @foreach ($allKriteria as $kriteria)
-              <option value="{{ $kriteria->id }}">{{ $kriteria->name }}</option>
+              <option value="{{ $kriteria->id }}">{{ strtoupper($kriteria->name) }}</option>
             @endforeach
           </select>
           <label class="input-group-text" for="kriteria">Pilihan</label>

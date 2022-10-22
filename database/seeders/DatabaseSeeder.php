@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KriteriaSeeder::class,
             SubkriteriaSeeder::class,
-            AlternatifSeeder::class
+            AlternatifSeeder::class,
+            NilaiBobotSeeder::class
         ]);
     }
 }
