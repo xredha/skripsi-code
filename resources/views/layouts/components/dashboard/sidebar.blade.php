@@ -48,7 +48,7 @@
         </li>
 
         <li class='sidebar-title'>Pengaturan</li>
-        <li class="sidebar-item  has-sub">
+        {{-- <li class="sidebar-item  has-sub">
           <a href="#" class='sidebar-link'>
             <i data-feather="book" width="20"></i>
             <span>Laporan</span>
@@ -58,14 +58,14 @@
             <li><a href="error-404.html">404</a></li>
             <li><a href="error-500.html">500</a></li>
           </ul>
-        </li>
+        </li> --}}
         <li class="sidebar-item  has-sub">
           <a href="#" class='sidebar-link'>
             <i data-feather="user" width="20"></i>
             <span>Pengguna</span>
           </a>
           <ul class="submenu ">
-            <li><a href="auth-login.html">Olah Data User</a></li>
+            <li><a href="{{ route('user.index') }}">Olah Data User</a></li>
           </ul>
         </li>
 

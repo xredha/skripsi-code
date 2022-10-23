@@ -44,6 +44,7 @@
   <script src="{{ asset('dashboard/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ asset('dashboard/assets/js/pages/dashboard.js') }}"></script>
   <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
+  @yield('custom-javascript')
   @livewireScripts
 </body>
 

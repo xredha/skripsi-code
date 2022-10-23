@@ -27,6 +27,7 @@
   <script src="{{ asset('dashboard/assets/js/feather-icons/feather.min.js') }}"></script>
   <script src="{{ asset('dashboard/assets/js/app.js') }}"></script>
   <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
+  @yield('custom-javascript')
 </body>
 
 </html>
