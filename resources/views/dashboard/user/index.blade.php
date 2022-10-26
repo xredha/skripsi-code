@@ -29,29 +29,33 @@
         </tr>
       </thead>
       <tbody class="bg-white">
-        @foreach ($allUser as $user)
-        <tr>
-          <td>{{ ucwords($user->name) }}</td>
-          <td>{{ $user->email }}</td>
-          <td>{{ $user->role }}</td>
-          <td>
-            <div class="d-flex justify-content-around">
-              {{-- Update --}}
-              <a href="{{ route('user.edit', $user->id) }}" class="me-3">
-                <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
-              </a>
-              {{-- Delete --}}
-              <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('user.destroy', $user->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
+        @foreach ($allUserExpectLogin as $user)
+          <tr>
+            <td>{{ ucwords($user->name) }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->role }}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {{-- Update --}}
+                <a href="{{ route('user.edit', $user->id) }}" class="me-3">
+                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
+                </a>
+                {{-- Delete --}}
+                @if ( ($user->role == 'admin') && (count($adminAvailable) <= 1) )
+                @else
+                <form onsubmit="return confirm('Ingin Menghapus User {{ ucwords($user->name) }} ?');"
+                  action="{{ route('user.destroy', $user->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
 
-                <button type="submit" class="bg-transparent border-0 text-danger">
-                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
-                </button>
-              </form>
-            </div>
-          </td>
-        </tr>
+                  <button type="submit" class="bg-transparent border-0 text-danger">
+                    <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
+                  </button>
+                </form>
+                @endif
+              </div>
+            </td>
+          </tr>
         @endforeach
       </tbody>
     </table>

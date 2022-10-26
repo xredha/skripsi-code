@@ -29,36 +29,50 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Nama"
-                          required value="{{ $user->name }}">
+                        <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
+                          name="name" placeholder="Nama" required value="{{ $user->name }}">
                       </div>
+                      @error('name')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" name="email" placeholder="E-mail"
-                          required value="{{ $user->email }}">
+                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                          name="email" placeholder="E-mail" required value="{{ $user->email }}">
                       </div>
+                      @error('email')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="role">Role</label>
-                        <select class="form-select" id="role" name="role" required>
+                        <select class="form-select @error('role') is-invalid @enderror" id="role" name="role"
+                          required>
                           <option value='anggota' {{ $user->role == 'anggota' ? 'selected' : '' }}>Anggota</option>
                           <option value='staff' {{ $user->role == 'staff' ? 'selected' : '' }}>Staff</option>
                           <option value='admin' {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>
                       </div>
+                      @error('role')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="col-12">
                       <label for="password">New Password <i>(Opsional)</i></label>
                       <div class="form-group position-relative has-icon-right">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" id="password" class="form-control" name="password"
+                          placeholder="Minimal 8 Character" @error('password') is-invalid @enderror>
                         <div id="icon-password" class="form-control-icon" onclick="togglePassword()">
                           <i data-feather="eye"></i>
                         </div>
                       </div>
+                      @error('password')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12 d-flex justify-content-end">
                       <button type="submit" class="btn btn-primary me-1 mb-1">Ubah Data</button>

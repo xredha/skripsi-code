@@ -24,7 +24,7 @@
                     </div>
                   </div>
                   @error('name')
-                    <p class="text-danger">{{ $message }}</p>
+                    @include('layouts.partial.invalid-form', ['message' => $message])
                   @enderror
                 </div>
                 <div>
@@ -37,20 +37,20 @@
                     </div>
                   </div>
                   @error('email')
-                    <p class="text-danger">{{ $message }}</p>
+                    @include('layouts.partial.invalid-form', ['message' => $message])
                   @enderror
                 </div>
                 <div>
                   <label for="password">Password</label>
                   <div class="form-group position-relative has-icon-left">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                      name="password" required autocomplete="current-password">
+                      name="password" required autocomplete="current-password" placeholder="Minimal 8 Character">
                     <div class="form-control-icon">
                       <i data-feather="lock"></i>
                     </div>
                   </div>
                   @error('password')
-                    <p class="text-danger">{{ $message }}</p>
+                    @include('layouts.partial.invalid-form', ['message' => $message])
                   @enderror
                 </div>
                 <div>
@@ -58,7 +58,7 @@
                   <div class="form-group position-relative has-icon-left">
                     <input id="password_confirmation" type="password"
                       class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required
-                      autocomplete="new-password">
+                      autocomplete="new-password" placeholder="Minimal 8 Character">
                     <div class="form-control-icon">
                       <i data-feather="lock"></i>
                     </div>

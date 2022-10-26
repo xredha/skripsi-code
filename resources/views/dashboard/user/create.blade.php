@@ -27,22 +27,42 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Nama"
-                          required>
+                        <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
+                          name="name" placeholder="Nama" required>
                       </div>
+                      @error('name')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" name="email" placeholder="E-mail"
-                          required>
+                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                          name="email" placeholder="E-mail" required>
                       </div>
+                      @error('email')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12">
                       <label for="password">Password</label>
                       <div class="form-group position-relative has-icon-right">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="Password"
-                          required>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                          name="password" required autocomplete="current-password" placeholder="Minimal 8 Character">
+                        <div id="icon-password" class="form-control-icon" onclick="togglePassword()">
+                          <i data-feather="eye"></i>
+                        </div>
+                      </div>
+                      @error('password')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
+                    </div>
+                    <div class="col-12">
+                      <label for="password_confirmation">Confirm Password</label>
+                      <div class="form-group position-relative has-icon-right">
+                        <input id="password_confirmation" type="password"
+                          class="form-control @error('password') is-invalid @enderror" name="password_confirmation"
+                          required autocomplete="new-password" placeholder="Minimal 8 Character">
                         <div id="icon-password" class="form-control-icon" onclick="togglePassword()">
                           <i data-feather="eye"></i>
                         </div>
@@ -51,13 +71,17 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="role">Role</label>
-                        <select class="form-select" id="role" name="role" required>
+                        <select class="form-select  @error('role') is-invalid @enderror" id="role" name="role"
+                          required>
                           <option value='' selected>Pilih Role...</option>
                           <option value='anggota'>Anggota</option>
                           <option value='staff'>Staff</option>
                           <option value='admin'>Admin</option>
                         </select>
                       </div>
+                      @error('role')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12 d-flex justify-content-end">
                       <button type="submit" class="btn btn-primary me-1 mb-1">Tambah Data</button>

@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $allUser = User::all();
+        $idLogin = Auth::id();
+        $allUserExpectLogin = User::where('id', '<>', $idLogin)->get();
+        $adminAvailable = User::where('role', '=', 'admin')->get();
 
-        return view('dashboard.user.index', compact(['allUser']));
+        return view('dashboard.user.index', compact(['allUserExpectLogin', 'adminAvailable']));
     }
 
     public function create()
@@ -22,11 +25,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string',
-            'role' => 'required|string',
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string', 'regex:(anggota|staff|admin)'],
         ]);
 
         $user = User::create([
@@ -40,14 +43,14 @@ class UserController extends Controller
             return redirect()
                 ->route('user.index')
                 ->with([
-                    'success' => 'New User has been created successfully'
+                    'success' => 'User berhasil dibuat'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'User gagal dibuat'
                 ]);
         }
     }
@@ -60,10 +63,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'role' => 'required|string',
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'role' => ['required', 'string', 'regex:(anggota|staff|admin)'],
         ]);
 
         $user = User::findOrFail($id);
@@ -87,14 +90,14 @@ class UserController extends Controller
             return redirect()
                 ->route('user.index')
                 ->with([
-                    'success' => 'New User has been updated successfully'
+                    'success' => 'User berhasil diubah'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'User gagal diubah'
                 ]);
         }
     }
@@ -108,13 +111,13 @@ class UserController extends Controller
             return redirect()
                 ->route('user.index')
                 ->with([
-                    'success' => 'User has been deleted successfully'
+                    'success' => 'User berhasil dihapus'
                 ]);
         } else {
             return redirect()
                 ->route('user.index')
                 ->with([
-                    'error' => 'Some problem has occurred, please try again'
+                    'error' => 'User gagal dihapus'
                 ]);
         }
     }
