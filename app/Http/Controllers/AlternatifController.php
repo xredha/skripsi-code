@@ -21,14 +21,11 @@ class AlternatifController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'codeSaham' => 'required|string',
-            'nameSaham' => 'required|string',
-        ]);
+        $this->validator($request);
 
         $lastValueCode = DB::table('alternatif')->orderBy('code', 'desc')->first();
         $code = is_null($lastValueCode) ? 1 : $lastValueCode->code + 1;
-        
+
         $alternatif = Alternatif::create([
             'code' => $code,
             'code_saham' => $request->codeSaham,
@@ -39,14 +36,14 @@ class AlternatifController extends Controller
             return redirect()
                 ->route('alternatif.index')
                 ->with([
-                    'success' => 'New Alternatif has been created successfully'
+                    'success' => 'Alternatif berhasil dibuat'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'Alternatif gagal dibuat'
                 ]);
         }
     }
@@ -59,10 +56,7 @@ class AlternatifController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'codeSaham' => 'required|string',
-            'nameSaham' => 'required|string',
-        ]);
+        $this->validator($request);
 
         $alternatif = Alternatif::findOrFail($id);
 
@@ -75,14 +69,14 @@ class AlternatifController extends Controller
             return redirect()
                 ->route('alternatif.index')
                 ->with([
-                    'success' => 'New Alternatif has been created successfully'
+                    'success' => 'Alternatif berhasil diubah'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'Alternatif gagal diubah'
                 ]);
         }
     }
@@ -96,14 +90,22 @@ class AlternatifController extends Controller
             return redirect()
                 ->route('alternatif.index')
                 ->with([
-                    'success' => 'Alternatif has been deleted successfully'
+                    'success' => 'Alternatif berhasil dihapus'
                 ]);
         } else {
             return redirect()
                 ->route('alternatif.index')
                 ->with([
-                    'error' => 'Some problem has occurred, please try again'
+                    'error' => 'Alternatif gagal dihapus'
                 ]);
         }
+    }
+
+    protected function validator(Request $request)
+    {
+        return $request->validate([
+            'codeSaham' => ['required', 'string', 'max:255'],
+            'nameSaham' => ['required', 'string', 'max:255'],
+        ]);
     }
 }

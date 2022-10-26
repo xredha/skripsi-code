@@ -30,16 +30,13 @@ class NilaiBobotController extends Controller
         $allKriteria = Kriteria::all();
         $allSubkriteria = Subkriteria::all();
         $allAlternatif = Alternatif::all();
+
         return view('dashboard.nilai_bobot.create', compact('allKriteria', 'allSubkriteria', 'allAlternatif'));
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'alternatif' => 'required',
-            'kriteria' => 'required|array',
-            'nilai' => 'required|array',
-        ]);
+        $this->validator($request);
 
         for ($i = 0; $i < count($request->nilai); $i++) {
             NilaiBobot::create([
@@ -52,7 +49,7 @@ class NilaiBobotController extends Controller
         return redirect()
             ->route('nilai-bobot.index')
             ->with([
-                'success' => 'New Bobot Nilai has been created successfully'
+                'success' => 'Nilai Bobot berhasil dibuat'
             ]);
     }
 
@@ -73,11 +70,7 @@ class NilaiBobotController extends Controller
 
     public function update(Request $request, $alternatifId)
     {
-        $this->validate($request, [
-            'alternatif' => 'required',
-            'kriteria' => 'required|array',
-            'nilai' => 'required|array',
-        ]);
+        $this->validator($request);
 
         $nilaiBobot = DB::table('nilai_bobot')
             ->where('alternatif_id', '=', (int) $alternatifId)
@@ -94,7 +87,18 @@ class NilaiBobotController extends Controller
         return redirect()
             ->route('nilai-bobot.index')
             ->with([
-                'success' => 'New Nilai Bobot has been updated successfully'
+                'success' => 'Nilai Bobot berhasil diubah'
             ]);
+    }
+
+    protected function validator(Request $request)
+    {
+        return $request->validate([
+            'alternatif' => ['required', 'numeric'],
+            'kriteria' => ['required', 'array'],
+            'kriteria.*' => ['required', 'numeric'],
+            'nilai' => ['required', 'array'],
+            'nilai.*' => ['required', 'numeric', 'between:1,5'],
+        ]);
     }
 }

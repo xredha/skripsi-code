@@ -29,15 +29,21 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="codeSaham">Code Saham</label>
-                        <input type="text" id="codeSaham" class="form-control" name="codeSaham"
-                          placeholder="Code Saham" required value="{{ $alternatif->code_saham }}">
+                        <input type="text" id="codeSaham" class="form-control @error('codeSaham') is-invalid @enderror"
+                          name="codeSaham" placeholder="Code Saham" required value="{{ $alternatif->code_saham }}">
+                        @error('codeSaham')
+                          @include('layouts.partial.invalid-form', ['message' => $message])
+                        @enderror
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="nameSaham">Nama Saham</label>
-                        <input type="text" id="nameSaham" class="form-control" name="nameSaham"
-                          placeholder="Nama Saham" required value="{{ $alternatif->name_saham }}">
+                        <input type="text" id="nameSaham" class="form-control @error('nameSaham') is-invalid @enderror"
+                          name="nameSaham" placeholder="Nama Saham" required value="{{ $alternatif->name_saham }}">
+                        @error('nameSaham')
+                          @include('layouts.partial.invalid-form', ['message' => $message])
+                        @enderror
                       </div>
                     </div>
                     <div class="col-12 d-flex justify-content-end">

@@ -6,17 +6,23 @@
     <div class="form-body">
       <div class="form-group col-12">
         <label for="range">Range</label>
-        <input type="text" class="form-control" name="rangeForm" wire:model="rangeForm" required
-          {{ $isFormActive ? '' : 'disabled' }} value="{{ $rangeForm }}">
+        <input type="text" class="form-control @error('rangeForm') is-invalid @enderror" name="rangeForm"
+          wire:model="rangeForm" required {{ $isFormActive ? '' : 'disabled' }} value="{{ $rangeForm }}">
+        @error('rangeForm')
+          @include('layouts.partial.invalid-form', ['message' => $message])
+        @enderror
       </div>
       <div class="form-group col-12">
         <label for="nilai">Nilai</label>
-        <select class="form-select" name="nilaiForm" wire:model="nilaiForm" required
-          {{ $isFormActive ? '' : 'disabled' }}>
+        <select class="form-select @error('nilaiForm') is-invalid @enderror" name="nilaiForm" wire:model="nilaiForm"
+          required {{ $isFormActive ? '' : 'disabled' }}>
           @for ($i = 1; $i <= 5; $i++)
             <option value='{{ $i }}' {{ $i == $nilaiForm ? 'selected' : '' }}>{{ $i }}</option>
           @endfor
         </select>
+        @error('nilaiForm')
+          @include('layouts.partial.invalid-form', ['message' => $message])
+        @enderror
       </div>
     </div>
     <div class="col-12 d-flex justify-content-end">
@@ -31,7 +37,8 @@
           <div class="card-content">
             <div class="card-body">
               <h5 class="text-center">Daftar Subkriteria</h5>
-              <button type="button" class="btn btn-sm btn-danger" wire:click="removeAll()">
+              <button type="button" class="btn btn-sm btn-danger" wire:click="removeAll()"
+                onclick="confirm('Ingin Menghapus Semua Subkriteria?') || event.stopImmediatePropagation()">
                 Hapus Semua
               </button>
               @foreach ($allSubkriteriaByKriteriaId as $index => $subkriteria)
@@ -57,7 +64,8 @@
                         Ubah
                       </button>
                       <button type="button" class="btn btn-sm btn-outline-danger min-width-70 mt-2"
-                        wire:click="remove({{ $subkriteria->id }})" wire:key="remove.{{ $subkriteria->id }}">
+                        wire:click="remove({{ $subkriteria->id }})" wire:key="remove.{{ $subkriteria->id }}"
+                        onclick="confirm('Ingin Menghapus Subkriteria Nilai : {{ $subkriteria->nilai }} ?') || event.stopImmediatePropagation()">
                         Hapus
                       </button>
                     </div>

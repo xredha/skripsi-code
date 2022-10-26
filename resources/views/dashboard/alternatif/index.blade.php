@@ -30,28 +30,29 @@
       </thead>
       <tbody class="bg-white">
         @foreach ($allAlternatif as $alternatif)
-        <tr>
-          <td>A{{ $alternatif->code }}</td>
-          <td>{{ strtoupper($alternatif->code_saham) }}</td>
-          <td>{{ ucwords($alternatif->name_saham) }}</td>
-          <td>
-            <div class="d-flex justify-content-around">
-              {{-- Update --}}
-              <a href="{{ route('alternatif.edit', $alternatif->id) }}" class="me-3">
-                <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
-              </a>
-              {{-- Delete --}}
-              <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('alternatif.destroy', $alternatif->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
+          <tr>
+            <td>A{{ $alternatif->code }}</td>
+            <td>{{ strtoupper($alternatif->code_saham) }}</td>
+            <td>{{ ucwords($alternatif->name_saham) }}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {{-- Update --}}
+                <a href="{{ route('alternatif.edit', $alternatif->id) }}" class="me-3">
+                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
+                </a>
+                {{-- Delete --}}
+                <form onsubmit="return confirm('Ingin Menghapus Alternatif {{ strtoupper($alternatif->code_saham) }} ?');"
+                  action="{{ route('alternatif.destroy', $alternatif->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
 
-                <button type="submit" class="bg-transparent border-0 text-danger">
-                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
-                </button>
-              </form>
-            </div>
-          </td>
-        </tr>
+                  <button type="submit" class="bg-transparent border-0 text-danger">
+                    <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
         @endforeach
       </tbody>
     </table>

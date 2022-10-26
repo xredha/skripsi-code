@@ -35,8 +35,12 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="alternatif">Alternatif</label>
-                        <input type="text" id="alternatif" class="form-control" name="alternatif" readonly
+                        <input type="text" id="alternatif"
+                          class="form-control @error('alternatif') is-invalid @enderror" name="alternatif" readonly
                           value="{{ ucwords($selectedAlternatif[0]->name_saham) }} ({{ strtoupper($selectedAlternatif[0]->code_saham) }})">
+                        @error('alternatif')
+                          @include('layouts.partial.invalid-form', ['message' => $message])
+                        @enderror
                       </div>
                       <h4 class="text-center">Kriteria</h4>
                       <div class="row match-height mb-3">
@@ -44,11 +48,12 @@
                           <div class="card m-0 border shadow-none">
                             <div class="card-content">
                               <div class="card-body">
-                                @foreach ($selectedAlternatif as $item)
+                                @foreach ($selectedAlternatif as $key => $item)
                                   <input type="hidden" name="kriteria[]" value={{ $item->kriteria_id }}>
                                   <div class="form-group">
                                     <label for="nilai">{{ strtoupper($item->kriteria_name) }}</label>
-                                    <select class="form-select" id="nilai" name="nilai[]" required>
+                                    <select class="form-select @error('nilai.' . $key) is-invalid @enderror"
+                                      id="nilai" name="nilai[]" required>
                                       @foreach ($allSubkriteria as $subkriteria)
                                         @if ($item->kriteria_id == $subkriteria->kriteria_id)
                                           <option value="{{ $subkriteria->nilai }}"
@@ -57,6 +62,9 @@
                                         @endif
                                       @endforeach
                                     </select>
+                                    @error('nilai.' . $key)
+                                      @include('layouts.partial.invalid-form', ['message' => $message])
+                                    @enderror
                                   </div>
                                 @endforeach
                               </div>

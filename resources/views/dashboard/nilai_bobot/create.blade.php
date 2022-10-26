@@ -32,13 +32,17 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="alternatif">Alternatif</label>
-                        <select class="form-select" id="alternatif" name="alternatif" required>
+                        <select class="form-select @error('alternatif') is-invalid @enderror" id="alternatif"
+                          name="alternatif" required>
                           <option value="" selected>Pilih Alternatif...</option>
                           @foreach ($allAlternatif as $alternatif)
                             <option value='{{ $alternatif->id }}'>{{ ucwords($alternatif->name_saham) }}
                               {{ strtoupper($alternatif->code_saham) }}</option>
                           @endforeach
                         </select>
+                        @error('alternatif')
+                          @include('layouts.partial.invalid-form', ['message' => $message])
+                        @enderror
                       </div>
                       <h4 class="text-center">Kriteria</h4>
                       <div class="row match-height mb-3">
@@ -46,11 +50,12 @@
                           <div class="card m-0 border shadow-none">
                             <div class="card-content">
                               <div class="card-body">
-                                @foreach ($allKriteria as $kriteria)
+                                @foreach ($allKriteria as $key => $kriteria)
                                   <input type="hidden" name="kriteria[]" value={{ $kriteria->id }}>
                                   <div class="form-group">
-                                    <label for="nilai">{{ strtoupper($kriteria->name)  }}</label>
-                                    <select class="form-select" id="nilai" name="nilai[]" required>
+                                    <label for="nilai">{{ strtoupper($kriteria->name) }}</label>
+                                    <select class="form-select @error('nilai.' . $key) is-invalid @enderror"
+                                      id="nilai" name="nilai[]" required>
                                       <option value="" selected>Pilih Nilai...</option>
                                       @foreach ($allSubkriteria as $subkriteria)
                                         @if ($kriteria->id == $subkriteria->kriteria_id)
@@ -58,6 +63,9 @@
                                         @endif
                                       @endforeach
                                     </select>
+                                    @error('nilai.' . $key)
+                                      @include('layouts.partial.invalid-form', ['message' => $message])
+                                    @enderror
                                   </div>
                                 @endforeach
                               </div>

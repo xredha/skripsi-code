@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'anggota', 'email' => 'anggota@gmail.com', 'password' => '12345678', 'role' => 'anggota'],
-            ['name' => 'staff', 'email' => 'staff@gmail.com', 'password' => '12345678', 'role' => 'staff'],
-            ['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => '12345678', 'role' => 'admin']
+            ['name' => 'anggota', 'email' => 'anggota@gmail.com', 'password' => 'aaaaaaaa', 'role' => 'anggota'],
+            ['name' => 'staff', 'email' => 'staff@gmail.com', 'password' => 'aaaaaaaa', 'role' => 'staff'],
+            ['name' => 'admin', 'email' => 'admin@gmail.com', 'password' => 'aaaaaaaa', 'role' => 'admin']
         ];
 
         foreach ($data as $item) {
@@ -28,7 +28,6 @@ class UserSeeder extends Seeder
                 'email' => $item['email'],
                 'password' => Hash::make($item['password']),
                 'role' => $item['role'],
-                'remember_token' => Str::random(10)
             ]);
         }
     }

@@ -10,11 +10,12 @@ class Create extends Component
     public $selectedKriteria = null;
     public $allSubkriteriaByKriteriaId = null;
     public $formCounter = [];
-    public $dataStore = [];
+    public $formData = [];
 
     protected $rules = [
-        'dataStore.*.range' => ['required'],
-        'dataStore.*.nilai' => ['required', 'min:1', 'max:5'],
+        'selectedKriteria' => ['required', 'numeric'],
+        'formData.*.range' => ['required', 'string', 'max:255'],
+        'formData.*.nilai' => ['required', 'numeric', 'between:1,5'],
     ];
 
     public function render()
@@ -43,35 +44,38 @@ class Create extends Component
         $this->formCounter[] = $countFormCounter;
     }
 
-    public function remove() {
+    public function remove()
+    {
         array_pop($this->formCounter);
     }
 
-    public function submit() {
+    public function submit()
+    {
         $this->validate();
 
-        $this->store($this->dataStore);
+        $this->store($this->formData);
     }
 
-    protected function store($data) {
-        for($i = 0; $i < count($data); $i++) {
+    protected function store($data)
+    {
+        for ($i = 0; $i < count($data); $i++) {
             $data[$i]['kriteria_id'] = $this->selectedKriteria;
         }
-        
+
         $store = DB::table('subkriteria')->insert($data);
 
         if ($store) {
             return redirect()
                 ->route('subkriteria.index')
                 ->with([
-                    'success' => 'New subkriteria has been created successfully'
+                    'success' => 'Subkriteria berhasil dibuat'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'Subkriteria gagal dibuat'
                 ]);
         }
     }

@@ -4,7 +4,8 @@
       <div class="form-group col-md-6">
         <label for="kriteria" class="mb-2">Pilih Kriteria</label>
         <div class="input-group mb-3">
-          <select class="form-select" id="kriteria" name="kriteria" wire:model="selectedKriteria">
+          <select class="form-select @error('selectedKriteria') is-invalid @enderror" id="kriteria" name="kriteria"
+            wire:model="selectedKriteria">
             <option value="" selected>Pilih Kriteria...</option>
             @foreach ($allKriteria as $kriteria)
               <option value="{{ $kriteria->id }}">{{ strtoupper($kriteria->name) }}</option>
@@ -12,6 +13,9 @@
           </select>
           <label class="input-group-text" for="kriteria">Pilihan</label>
         </div>
+        @error('selectedKriteria')
+          @include('layouts.partial.invalid-form', ['message' => $message])
+        @enderror
       </div>
     </div>
   </div>
@@ -36,19 +40,28 @@
                         <div class="row">
                           <div class="form-group col-12 col-md-6">
                             <label for="range">Range</label>
-                            <input type="text" class="form-control" name="range" placeholder="Persentase Range"
-                              wire:model="dataStore.{{ $index }}.range"
+                            <input type="text"
+                              class="form-control @error('formData.' . $index . '.range') is-invalid @enderror"
+                              name="range" placeholder="Persentase Range"
+                              wire:model="formData.{{ $index }}.range"
                               wire:key="formCounter.{{ $index }}.range" required>
+                            @error('formData.' . $index . '.range')
+                              @include('layouts.partial.invalid-form', ['message' => $message])
+                            @enderror
                           </div>
                           <div class="form-group col-12 col-md-6">
                             <label for="nilai">Nilai</label>
-                            <select class="form-select" name="nilai" wire:model="dataStore.{{ $index }}.nilai"
-                              wire:key="formCounter.{{ $index }}.nilai" required>
+                            <select class="form-select @error('formData.' . $index . '.nilai') is-invalid @enderror"
+                              name="nilai" wire:model="formData.{{ $index }}.nilai"
+                              wire:key="formCounter.{{ $index }}.nilai" required :errors="$errors">
                               <option value="" selected>Pilih Nilai...</option>
                               @for ($i = 1; $i <= 5; $i++)
                                 <option value='{{ $i }}'>{{ $i }}</option>
                               @endfor
                             </select>
+                            @error('formData.' . $index . '.nilai')
+                              @include('layouts.partial.invalid-form', ['message' => $message])
+                            @enderror
                           </div>
                         </div>
                       </div>

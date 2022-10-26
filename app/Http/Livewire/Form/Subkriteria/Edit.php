@@ -13,6 +13,12 @@ class Edit extends Component
     public $rangeForm = null;
     public $nilaiForm = null;
 
+    protected $rules = [
+        'subkriteriaId' => ['required', 'numeric'],
+        'rangeForm' => ['required', 'string', 'max:255'],
+        'nilaiForm' => ['required', 'numeric', 'between:1,5'],
+    ];
+
     public function render()
     {
         $allSubkriteriaByKriteriaId = DB::table('subkriteria')->where('kriteria_id', '=', $this->kriteriaId)->orderBy('nilai')->get();
@@ -34,6 +40,8 @@ class Edit extends Component
 
     public function updateForm()
     {
+        $this->validate();
+
         $update = DB::table('subkriteria')
             ->where('id', $this->subkriteriaId)
             ->update(
@@ -42,33 +50,50 @@ class Edit extends Component
             );
 
         $this->resetForm();
-        // if ($update) {
-        //     return redirect()
-        //         ->route('subkriteria.index')
-        //         ->with([
-        //             'success' => 'New subkriteria has been created successfully'
-        //         ]);
-        // } else {
-        //     return redirect()
-        //         ->back()
-        //         ->withInput()
-        //         ->with([
-        //             'error' => 'Some problem occurred, please try again'
-        //         ]);
-        // }
+
+        if ($update) {
+            return redirect()
+                ->route('subkriteria.index')
+                ->with([
+                    'success' => 'Subkriteria berhasil diubah'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Subkriteria gagal diubah'
+                ]);
+        }
     }
 
     public function remove($id)
     {
-        $remove = DB::table('subkriteria')->where('id', '=', $id)->delete();
+        DB::table('subkriteria')->where('id', '=', $id)->delete();
     }
 
     public function removeAll()
     {
-        $removeAll = DB::table('subkriteria')->where('kriteria_id', '=', $this->kriteriaId)->delete();
+        $deleteAll = DB::table('subkriteria')->where('kriteria_id', '=', $this->kriteriaId)->delete();
+
+        if ($deleteAll) {
+            return redirect()
+                ->route('subkriteria.index')
+                ->with([
+                    'success' => 'Semua subkriteria berhasil dihapus'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Semua subkriteria gagal dihapus'
+                ]);
+        }
     }
 
-    protected function resetForm() {
+    protected function resetForm()
+    {
         $this->rangeForm = null;
         $this->nilaiForm = null;
         $this->subkriteriaId = null;

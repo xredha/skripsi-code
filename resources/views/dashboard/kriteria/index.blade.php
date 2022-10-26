@@ -32,30 +32,31 @@
       </thead>
       <tbody class="bg-white">
         @foreach ($allKriteria as $kriteria)
-        <tr>
-          <td>C{{ $kriteria->code }}</td>
-          <td>{{ strtoupper($kriteria->name) }}</td>
-          <td>{{ ucwords($kriteria->description) }}</td>
-          <td>{{ ucwords($kriteria->type) }}</td>
-          <td>{{ $kriteria->bobot }}</td>
-          <td>
-            <div class="d-flex justify-content-around">
-              {{-- Update --}}
-              <a href="{{ route('kriteria.edit', $kriteria->id) }}" class="me-3">
-                <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
-              </a>
-              {{-- Delete --}}
-              <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kriteria.destroy', $kriteria->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
+          <tr>
+            <td>C{{ $kriteria->code }}</td>
+            <td>{{ strtoupper($kriteria->name) }}</td>
+            <td>{{ ucwords($kriteria->description) }}</td>
+            <td>{{ ucwords($kriteria->type) }}</td>
+            <td>{{ $kriteria->bobot }}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                {{-- Update --}}
+                <a href="{{ route('kriteria.edit', $kriteria->id) }}" class="me-3">
+                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
+                </a>
+                {{-- Delete --}}
+                <form onsubmit="return confirm('Ingin Menghapus Kriteria {{ strtoupper($kriteria->name) }} ?');"
+                  action="{{ route('kriteria.destroy', $kriteria->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
 
-                <button type="submit" class="bg-transparent border-0 text-danger">
-                  <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
-                </button>
-              </form>
-            </div>
-          </td>
-        </tr>
+                  <button type="submit" class="bg-transparent border-0 text-danger">
+                    <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="trash"></i>Hapus
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
         @endforeach
       </tbody>
     </table>

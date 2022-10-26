@@ -21,12 +21,7 @@ class KriteriaController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'type' => 'required',
-            'bobot' => 'required',
-        ]);
+        $this->validator($request);
 
         $lastValueCode = DB::table('kriteria')->orderBy('code', 'desc')->first();
         $code = is_null($lastValueCode) ? 1 : $lastValueCode->code + 1;
@@ -44,14 +39,14 @@ class KriteriaController extends Controller
             return redirect()
                 ->route('kriteria.index')
                 ->with([
-                    'success' => 'New kriteria has been created successfully'
+                    'success' => 'Kriteria berhasil dibuat'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'Kriteria gagal dibuat'
                 ]);
         }
     }
@@ -64,12 +59,7 @@ class KriteriaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'type' => 'required',
-            'bobot' => 'required',
-        ]);
+        $this->validator($request);
 
         $kriteria = Kriteria::findOrFail($id);
         $bobot = (float)$request->bobot;
@@ -85,14 +75,14 @@ class KriteriaController extends Controller
             return redirect()
                 ->route('kriteria.index')
                 ->with([
-                    'success' => 'New kriteria has been created successfully'
+                    'success' => 'Kriteria berhasil diubah'
                 ]);
         } else {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with([
-                    'error' => 'Some problem occurred, please try again'
+                    'error' => 'Kriteria gagal diubah'
                 ]);
         }
     }
@@ -106,25 +96,24 @@ class KriteriaController extends Controller
             return redirect()
                 ->route('kriteria.index')
                 ->with([
-                    'success' => 'Kriteria has been deleted successfully'
+                    'success' => 'Kriteria berhasil dihapus'
                 ]);
         } else {
             return redirect()
                 ->route('kriteria.index')
                 ->with([
-                    'error' => 'Some problem has occurred, please try again'
+                    'error' => 'Kriteria gagal dihapus'
                 ]);
         }
     }
-}
 
-// /**
-//  * Display the specified resource.
-//  *
-//  * @param  int  $id
-//  * @return \Illuminate\Http\Response
-//  */
-// public function show($id)
-// {
-//     //
-// }
+    protected function validator(Request $request)
+    {
+        return $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255', "regex:(benefit|cost)"],
+            'bobot' => ['required', 'numeric', 'between:1,10'],
+        ]);
+    }
+}

@@ -27,16 +27,22 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="codeSaham">Code Saham</label>
-                        <input type="text" id="codeSaham" class="form-control" name="codeSaham"
-                          placeholder="Code Saham" required>
+                        <input type="text" id="codeSaham" class="form-control @error('codeSaham') is-invalid @enderror"
+                          name="codeSaham" placeholder="Code Saham" required>
                       </div>
+                      @error('codeSaham')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="nameSaham">Nama Saham</label>
-                        <input type="text" id="nameSaham" class="form-control" name="nameSaham"
-                          placeholder="Nama Saham" required>
+                        <input type="text" id="nameSaham" class="form-control @error('nameSaham') is-invalid @enderror"
+                          name="nameSaham" placeholder="Nama Saham" required>
                       </div>
+                      @error('nameSaham')
+                        @include('layouts.partial.invalid-form', ['message' => $message])
+                      @enderror
                     </div>
                     <div class="col-12 d-flex justify-content-end">
                       <button type="submit" class="btn btn-primary me-1 mb-1">Tambah Data</button>

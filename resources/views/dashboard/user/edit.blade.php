@@ -52,7 +52,7 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="col-12">
-                      <label for="password">New Password</label>
+                      <label for="password">New Password <i>(Opsional)</i></label>
                       <div class="form-group position-relative has-icon-right">
                         <input type="password" id="password" class="form-control" name="password" placeholder="Password">
                         <div id="icon-password" class="form-control-icon" onclick="togglePassword()">
