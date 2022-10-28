@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'User Edit')
+
 @section('title')
   <h4>Alternatif</h4>
 @endsection

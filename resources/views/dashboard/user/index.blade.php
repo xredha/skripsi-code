@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'User Index')
+
 @section('notification')
   @include('layouts.partial.notification')
 @endsection

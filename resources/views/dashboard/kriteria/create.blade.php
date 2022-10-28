@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'Kriteria Create')
+
 @section('title')
   <h4>Kriteria</h4>
 @endsection

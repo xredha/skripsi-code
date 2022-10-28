@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('page-title', 'Homepage')
+
 @section('content')
   <div class="container">
     <div class="row justify-content-center">

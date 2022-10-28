@@ -48,17 +48,6 @@
         </li>
 
         <li class='sidebar-title'>Pengaturan</li>
-        {{-- <li class="sidebar-item  has-sub">
-          <a href="#" class='sidebar-link'>
-            <i data-feather="book" width="20"></i>
-            <span>Laporan</span>
-          </a>
-          <ul class="submenu ">
-            <li><a href="error-403.html">403</a></li>
-            <li><a href="error-404.html">404</a></li>
-            <li><a href="error-500.html">500</a></li>
-          </ul>
-        </li> --}}
         <li class="sidebar-item  has-sub">
           <a href="#" class='sidebar-link'>
             <i data-feather="user" width="20"></i>

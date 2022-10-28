@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Dashboard - {{ config('app.name', 'Laravel') }}</title>
+  <title>@yield('page-title') - {{ config('app.name', 'Laravel') }}</title>
   <link rel="stylesheet" href="{{ asset('dashboard/assets/css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/chartjs/Chart.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">

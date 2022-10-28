@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'Nilai Bobot Edit')
+
 @section('notification')
   @include('layouts.partial.notification')
 @endsection

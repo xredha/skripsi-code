@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('page-title', 'Register')
+
 @section('content')
   <div id="auth">
     <div class="container">

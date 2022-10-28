@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'Matriks Ternormalisasi SAW')
+
 @section('title')
   <h4>Matriks Ternormalisasi (R)</h4>
 @endsection

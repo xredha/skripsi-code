@@ -1,5 +1,7 @@
 @extends('layouts.dashboard.master')
 
+@section('page-title', 'Hasil Perankingan WP')
+
 @section('title')
   <h4>Hasil Perankingan</h4>
 @endsection
