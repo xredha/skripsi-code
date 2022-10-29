@@ -30,7 +30,7 @@
                       <div class="form-group">
                         <label for="codeSaham">Code Saham</label>
                         <input type="text" id="codeSaham" class="form-control @error('codeSaham') is-invalid @enderror"
-                          name="codeSaham" placeholder="Code Saham" required>
+                          name="codeSaham" placeholder="4 Character" required>
                       </div>
                       @error('codeSaham')
                         @include('layouts.partial.invalid-form', ['message' => $message])
@@ -40,7 +40,7 @@
                       <div class="form-group">
                         <label for="nameSaham">Nama Saham</label>
                         <input type="text" id="nameSaham" class="form-control @error('nameSaham') is-invalid @enderror"
-                          name="nameSaham" placeholder="Nama Saham" required>
+                          name="nameSaham" required>
                       </div>
                       @error('nameSaham')
                         @include('layouts.partial.invalid-form', ['message' => $message])

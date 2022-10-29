@@ -20,7 +20,7 @@
                   <label for="name">Nama</label>
                   <div class="form-group position-relative has-icon-left">
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                      name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                      name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Maximum 25 Character">
                     <div class="form-control-icon">
                       <i data-feather="user"></i>
                     </div>
@@ -46,7 +46,7 @@
                   <label for="password">Password</label>
                   <div class="form-group position-relative has-icon-left">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                      name="password" required autocomplete="current-password" placeholder="Minimal 8 Character">
+                      name="password" required autocomplete="current-password" placeholder="Minimum 8 Character">
                     <div class="form-control-icon">
                       <i data-feather="lock"></i>
                     </div>
@@ -60,7 +60,7 @@
                   <div class="form-group position-relative has-icon-left">
                     <input id="password_confirmation" type="password"
                       class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required
-                      autocomplete="new-password" placeholder="Minimal 8 Character">
+                      autocomplete="new-password" placeholder="Minimum 8 Character">
                     <div class="form-control-icon">
                       <i data-feather="lock"></i>
                     </div>

@@ -16,7 +16,7 @@ class CreateAlternatifTable extends Migration
         Schema::create('alternatif', function (Blueprint $table) {
             $table->id();
             $table->integer('code')->unique();
-            $table->string('code_saham');
+            $table->string('code_saham', 4);
             $table->string('name_saham');
             $table->timestamps();
         });

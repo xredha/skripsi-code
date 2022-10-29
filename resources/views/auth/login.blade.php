@@ -33,7 +33,7 @@
                   <label for="password">Password</label>
                   <div class="form-group position-relative has-icon-left">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                      name="password" required autocomplete="current-password">
+                      name="password" required autocomplete="current-password" placeholder="Minimum 8 Character">
                     <div class="form-control-icon">
                       <i data-feather="lock"></i>
                     </div>

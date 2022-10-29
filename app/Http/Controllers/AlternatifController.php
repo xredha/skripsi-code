@@ -104,7 +104,7 @@ class AlternatifController extends Controller
     protected function validator(Request $request)
     {
         return $request->validate([
-            'codeSaham' => ['required', 'string', 'max:255'],
+            'codeSaham' => ['required', 'string', 'size:4'],
             'nameSaham' => ['required', 'string', 'max:255'],
         ]);
     }
