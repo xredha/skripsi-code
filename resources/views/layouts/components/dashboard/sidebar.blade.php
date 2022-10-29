@@ -18,8 +18,10 @@
             <span>Olah Data</span>
           </a>
           <ul class="submenu ">
+            @can('is_staff_or_admin')
             <li><a href="{{ route('kriteria.index') }}">Kriteria</a></li>
             <li><a href="{{ route('subkriteria.index') }}">Subkriteria</a></li>
+            @endcan
             <li><a href="{{ route('alternatif.index') }}">Alternatif</a></li>
             <li><a href="{{ route('nilai-bobot.index') }}">Nilai Bobot</a></li>
           </ul>
@@ -47,6 +49,7 @@
           </ul>
         </li>
 
+        @can('is_admin')
         <li class='sidebar-title'>Pengaturan</li>
         <li class="sidebar-item  has-sub">
           <a href="#" class='sidebar-link'>
@@ -57,6 +60,7 @@
             <li><a href="{{ route('user.index') }}">Olah Data User</a></li>
           </ul>
         </li>
+        @endcan
 
       </ul>
     </div>

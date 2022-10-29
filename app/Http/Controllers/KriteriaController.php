@@ -10,17 +10,23 @@ class KriteriaController extends Controller
 {
     public function index()
     {
+        $this->authorize('is_staff_or_admin');
+
         $allKriteria = Kriteria::all();
         return view('dashboard.kriteria.index', compact('allKriteria'));
     }
 
     public function create()
     {
+        $this->authorize('is_staff_or_admin');
+
         return view('dashboard.kriteria.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('is_staff_or_admin');
+
         $this->validator($request);
 
         $lastValueCode = DB::table('kriteria')->orderBy('code', 'desc')->first();
@@ -53,12 +59,16 @@ class KriteriaController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('is_staff_or_admin');
+
         $kriteria = Kriteria::findOrFail($id);
         return view('dashboard.kriteria.edit', compact('kriteria'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('is_staff_or_admin');
+
         $this->validator($request);
 
         $kriteria = Kriteria::findOrFail($id);
@@ -89,6 +99,8 @@ class KriteriaController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('is_staff_or_admin');
+
         $kriteria = Kriteria::findOrFail($id);
         $kriteria->delete();
 

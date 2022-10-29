@@ -15,13 +15,13 @@
 
     <div class="container text-center pt-32">
       <h1 class='error-title'>500</h1>
-      <p>Error system. Please contact administrator.</p>
+      <p>Sistem Error. Silahkan Kontak Administrator.</p>
       <a href="{{ route('homepage.index') }}" class='btn btn-primary'>Go Home</a>
       <a href="{{ route('dashboard.index') }}" class='btn btn-primary ms-3'>Go Dashboard</a>
     </div>
 
     <div class="footer pt-32">
-      <p class="text-center">Copyright &copy; Voler 2020</p>
+      <p class="text-center">2022 &copy; Galih Redha Saputra</p>
     </div>
   </div>
 </body>

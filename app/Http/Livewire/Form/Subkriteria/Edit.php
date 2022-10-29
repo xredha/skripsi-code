@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Form\Subkriteria;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Edit extends Component
 {
+    use AuthorizesRequests;
+
     public $kriteriaId;
     public $subkriteriaId = null;
     public $isFormActive = false;
@@ -21,12 +24,16 @@ class Edit extends Component
 
     public function render()
     {
+        $this->authorize('is_staff_or_admin');
+
         $allSubkriteriaByKriteriaId = DB::table('subkriteria')->where('kriteria_id', '=', $this->kriteriaId)->orderBy('nilai')->get();
         return view('livewire.form.subkriteria.edit', compact('allSubkriteriaByKriteriaId'));
     }
 
     public function update($id)
     {
+        $this->authorize('is_staff_or_admin');
+        
         $selectedSubkriteria = DB::table('subkriteria')->where('id', '=', $id)->orderBy('nilai')->get();
         foreach ($selectedSubkriteria as $item) {
             if ($item->id == $id) {
@@ -40,6 +47,8 @@ class Edit extends Component
 
     public function updateForm()
     {
+        $this->authorize('is_staff_or_admin');
+
         $this->validate();
 
         $update = DB::table('subkriteria')
@@ -69,11 +78,15 @@ class Edit extends Component
 
     public function remove($id)
     {
+        $this->authorize('is_staff_or_admin');
+        
         DB::table('subkriteria')->where('id', '=', $id)->delete();
     }
 
     public function removeAll()
     {
+        $this->authorize('is_staff_or_admin');
+        
         $deleteAll = DB::table('subkriteria')->where('kriteria_id', '=', $this->kriteriaId)->delete();
 
         if ($deleteAll) {

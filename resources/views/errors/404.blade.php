@@ -14,13 +14,13 @@
   <div id="error">
     <div class="container text-center pt-32">
       <h1 class="error-title">404</h1>
-      <p>we couldn't find the page you are looking for</p>
+      <p>Tidak dapat menemukan halaman yang dicari.</p>
       <a href="{{ route('homepage.index') }}" class='btn btn-primary'>Go Home</a>
       <a href="{{ route('dashboard.index') }}" class='btn btn-primary ms-3'>Go Dashboard</a>
     </div>
 
     <div class="footer pt-32">
-      <p class="text-center">Copyright &copy; Voler 2020</p>
+      <p class="text-center">2022 &copy; Galih Redha Saputra</p>
     </div>
   </div>
 </body>

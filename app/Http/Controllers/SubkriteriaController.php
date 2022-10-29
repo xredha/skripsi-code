@@ -10,6 +10,8 @@ class SubkriteriaController extends Controller
 {
     public function index()
     {
+        $this->authorize('is_staff_or_admin');
+
         $allSubkriteria = DB::table('subkriteria')
                             ->join('kriteria', 'subkriteria.kriteria_id', '=', 'kriteria.id')
                             ->select('subkriteria.*', 'kriteria.name')
@@ -21,11 +23,15 @@ class SubkriteriaController extends Controller
 
     public function create()
     {
+        $this->authorize('is_staff_or_admin');
+
         return view('dashboard.subkriteria.create');
     }
 
     public function edit($kriteriaId)
     {
+        $this->authorize('is_staff_or_admin');
+
         return view('dashboard.subkriteria.edit', ['kriteriaId' => $kriteriaId]);
     }
 }
