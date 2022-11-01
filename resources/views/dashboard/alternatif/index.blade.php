@@ -7,7 +7,7 @@
 @endsection
 
 @section('title')
-  <h4>Alternatif</h4>
+  <h4 class="text-center mb-3">Alternatif</h4>
 @endsection
 
 @section('content')
@@ -15,7 +15,12 @@
     <div class="card m-0 border border-bottom-0 shadow-none">
       <div class="card-body d-flex align-items-center justify-content-between">
         <p class="m-0">Halaman Alternatif</p>
-        <a href="{{ route('alternatif.create') }}"><button class="btn btn-success">Tambah Alternatif</button></a>
+        <div>
+          <a href="{{ route('alternatif.create') }}"><button class="btn btn-success">Tambah Alternatif</button></a>
+          <a href="{{ route('nilai-bobot.index') }}"><button class="btn btn-warning">Lanjut Nilai Bobot <i
+            class="badge-circle badge-circle-light-secondary font-medium-1"
+            data-feather="arrow-right"></i></button></a>
+        </div>
       </div>
     </div>
   </section>

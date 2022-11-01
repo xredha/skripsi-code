@@ -3,7 +3,7 @@
 @section('page-title', 'Hasil S dan V WP')
 
 @section('title')
-  <h4>Hasil S dan V</h4>
+  <h4 class="text-center mb-3">Hasil S dan V</h4>
 @endsection
 
 @section('content')
@@ -37,7 +37,7 @@
                 <td class="text-center">{{ strtoupper($item['name']) }}</td>
                 <td class="text-center">{{ $item['bobot'] }}</td>
                 <td class="text-center">{{ ucwords($item['type']) }}</td>
-                <td class="text-center">{{ $item['bobot_ternormalisasi'] }}</td>
+                <td class="text-center">{{ round($item['bobot_ternormalisasi'], 5) }}</td>
               </tr>
             @endforeach
           </tbody>
@@ -65,14 +65,14 @@
               <tr>
                 <td class="text-center">{{ ($i + 1) }}</td>
                 <td class="text-center">A{{ $vektorV[$i]['alternatif_code'] }}</td>
-                <td class="text-center">{{ $vektorS[$i]['vektor_s'] }}</td>
-                <td class="text-center">{{ $vektorV[$i]['vektor_v'] }}</td>
+                <td class="text-center">{{ round($vektorS[$i]['vektor_s'], 5) }}</td>
+                <td class="text-center">{{ round($vektorV[$i]['vektor_v'], 5) }}</td>
               </tr>
             @endfor
             <tr>
               <td class="text-center" colspan="2"><b>Total</b></td>
-              <td class="text-center">{{ array_sum(array_column($vektorS, 'vektor_s')) }}</td>
-              <td class="text-center">{{ array_sum(array_column($vektorV, 'vektor_v')) }}</td>
+              <td class="text-center">{{ round(array_sum(array_column($vektorS, 'vektor_s')), 5) }}</td>
+              <td class="text-center">{{ round(array_sum(array_column($vektorV, 'vektor_v')), 5) }}</td>
             </tr>
           </tbody>
         </table>

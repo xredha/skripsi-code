@@ -36,7 +36,7 @@
                 <td class="text-center">{{ ($index + 1) }}</td>
                 <td class="text-center">A{{ $item['alternatif_code'] }}</td>
                 <td class="text-center">{{ strtoupper($item['code_saham']) }}</td>
-                <td class="text-center">{{ $item['vektor_v'] }}</td>
+                <td class="text-center">{{ round($item['vektor_v'], 5) }}</td>
                 <td class="text-center">{{ ($index + 1) }}</td>
               </tr>
             @endforeach

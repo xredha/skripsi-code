@@ -7,7 +7,7 @@
 @endsection
 
 @section('title')
-  <h4>User</h4>
+  <h4 class="text-center mb-3">User</h4>
 @endsection
 
 @section('content')

@@ -7,7 +7,7 @@
 @endsection
 
 @section('title')
-  <h4>Nilai Bobot</h4>
+  <h4 class="text-center mb-3">Nilai Bobot</h4>
 @endsection
 
 @section('content')
@@ -17,6 +17,12 @@
         <p class="m-0">Halaman Nilai Bobot</p>
         <div>
           <a href="{{ route('nilai-bobot.create') }}"><button class="btn btn-success">Tambah Nilai Bobot</button></a>
+          <a href="{{ route('saw.index') }}"><button class="btn btn-warning">Metode SAW <i
+                class="badge-circle badge-circle-light-secondary font-medium-1"
+                data-feather="arrow-right"></i></button></a>
+          <a href="{{ route('wp.index') }}"><button class="btn btn-warning">Metode WP <i
+                class="badge-circle badge-circle-light-secondary font-medium-1"
+                data-feather="arrow-right"></i></button></a>
         </div>
       </div>
     </div>

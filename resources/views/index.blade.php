@@ -3,32 +3,75 @@
 @section('page-title', 'Homepage')
 
 @section('content')
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">{{ __('Dashboard') }}</div>
-
-          <div class="card-body">
-            @if (session('status'))
-              <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-              </div>
-            @endif
-
-            {{ __('You are logged in!') }}
-{{-- 
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                {{ Auth::user()->role }}
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('dashboard.index') }}">Go to Admin Admin</a>
-              </li>
-            </ul> --}}
+  <section id="homepage-content">
+    <div class="jumbotron">
+      <div class="jumbotron-image" style="background-image: url('{{ asset('images/jumbotron-image.jpg') }}')">
+        <div class="content-jumbotron-image">
+          <h1 class="text-center mb-3"><b>Selamat Datang di Skripsi Sistem Pendukung Keputusan tentang Saham Syari'ah</b>
+          </h1>
+          <h4 class="text-center mb-5">Sistem yang dibangun untuk memenuhi kebutuhan skripsi tentang <b>Sistem Pendukung
+              Keputusan</b>, membahas tentang
+            <b>Saham Syari'ah JII 70</b> dengan menggunakan metode <b><i class="custom-italic">Simple Additive
+                Weighting</i>
+              (SAW)</b> dan
+            <b><i class="custom-italic">Weighted Product</i> (WP)</b>
+          </h4>
+          <div>
+            <a href="#menu-content"><button class="btn btn-primary">Deskripsi</button></a>
+            <a href="{{ route('dashboard.index') }}"><button class="btn btn-success ms-3">Menuju Perhitungan</button></a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section id="menu-content">
+    <div class="container">
+      {{-- Menu --}}
+      <h1 class="text-center my-4">Menu</h1>
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="card border" onclick="selectedMenu(0)">
+          <div class="card-body custom-card-homepage">
+            <img src="{{ asset('images/homepage/icons/spk.png') }}" alt="Logo SPK">
+            <p class="text-center mt-3">Sistem Pendukung Keputusan</p>
+          </div>
+        </button>
+        <button class="card border" onclick="selectedMenu(1)">
+          <div class="card-body custom-card-homepage">
+            <img src="{{ asset('images/homepage/icons/method.png') }}" alt="Logo Metode">
+            <p class="text-center mt-3">Metode SAW dan WP</p>
+          </div>
+        </button>
+        <button class="card border" onclick="selectedMenu(2)">
+          <div class="card-body custom-card-homepage">
+            <img src="{{ asset('images/homepage/icons/icon-saham.png') }}" alt="Logo Saham dan Saham Syari'ah">
+            <p class="text-center mt-3">Saham dan Saham Syari'ah</p>
+          </div>
+        </button>
+        <button class="card border" onclick="selectedMenu(3)">
+          <div class="card-body custom-card-homepage">
+            <img src="{{ asset('images/homepage/icons/jii-70.png') }}" alt="Logo JII 70">
+            <p class="text-center mt-3">Saham Syari'ah JII 70</p>
+          </div>
+        </button>
+      </div>
+      {{-- Content --}}
+      <div class="card m-0 border shadow-none p-3 bg-white dynamic-content">
+        <div class="row gy-4">
+          <div class="col-lg-8 order-2 order-lg-1 dynamic-content-text">
+            <h2 class="mb-3">Sistem Pendukung Keputusan</h2>
+            <p>Sistem pendukung keputusan adalah suatu sistem informasi spesifik yang ditujukan untuk membantu manajemen
+              dalam mengambil keputusan yang berkaitan dengan persoalan yang bersifat semi terstruktur. Sistem ini
+              memiliki fasilitas untuk menghasilkan berbagai alternatif yang secara interaktif digunakan oleh pemakai.</p>
+          </div>
+          <div class="col-lg-4 order-1 order-lg-2 dynamic-content-image">
+            <img src="{{ asset('images/homepage/content/spk-content.svg') }}" alt="Logo Content SPK" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection
+
+@section('custom-javascript')
+  <script src="{{ asset('js/homepage/index.js') }}"></script>
 @endsection

@@ -3,7 +3,7 @@
 @section('page-title', 'Matriks Ternormalisasi SAW')
 
 @section('title')
-  <h4>Matriks Ternormalisasi (R)</h4>
+  <h4 class="text-center mb-3">Matriks Ternormalisasi (R)</h4>
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@
                 <td class="text-center">{{ strtoupper($item['name']) }}</td>
                 <td class="text-center">{{ $item['bobot'] }}</td>
                 <td class="text-center">{{ ucwords($item['type']) }}</td>
-                <td class="text-center">{{ $item['persentase_bobot'] }}</td>
+                <td class="text-center">{{ round($item['persentase_bobot'], 5) }}</td>
               </tr>
             @endforeach
             <tr>
@@ -73,7 +73,7 @@
               <tr>
                 <td class="text-center">A{{ $nilaiBobotGroupByAlternatifId[$i]->code }}</td>
                 @foreach ($matrixTernormalisasi[$i] as $kriteria)
-                  <td class="text-center">{{ $kriteria['value_r'] }}</td>
+                  <td class="text-center">{{ round($kriteria['value_r'], 5) }}</td>
                 @endforeach
               </tr>
             @endfor
