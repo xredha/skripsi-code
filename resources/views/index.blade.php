@@ -7,11 +7,11 @@
     <div class="jumbotron">
       <div class="jumbotron-image" style="background-image: url('{{ asset('images/jumbotron-image.jpg') }}')">
         <div class="content-jumbotron-image">
-          <h1 class="text-center mb-3"><b>Selamat Datang di Skripsi Sistem Pendukung Keputusan tentang Saham Syari'ah</b>
+          <h1 class="text-center mb-3"><b>Selamat Datang di Sistem Pendukung Keputusan Saham Syari'ah JII 70</b>
           </h1>
-          <h4 class="text-center mb-5">Sistem yang dibangun untuk memenuhi kebutuhan skripsi tentang <b>Sistem Pendukung
-              Keputusan</b>, membahas tentang
-            <b>Saham Syari'ah JII 70</b> dengan menggunakan metode <b><i class="custom-italic">Simple Additive
+          <h4 class="text-center mb-5"><b>Sistem Pendukung Keputusan</b> yang dibangun agar dapat melakukan perhitungan dan
+            rekomendasi <b>Saham Syari'ah Jakarta Islamic Index 70 (JII 70)</b> dengan menggunakan metode <b><i
+                class="custom-italic">Simple Additive
                 Weighting</i>
               (SAW)</b> dan
             <b><i class="custom-italic">Weighted Product</i> (WP)</b>

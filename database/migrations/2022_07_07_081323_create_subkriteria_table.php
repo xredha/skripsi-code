@@ -18,10 +18,12 @@ class CreateSubkriteriaTable extends Migration
             $table->id();
             $table->string('range');
             $table->float('nilai');
-            $table->integer('kriteria_id');
+            $table->unsignedBigInteger('kriteria_id');
             $table->timestamps();
 
             $table->unique(['nilai', 'kriteria_id'], 'nilai_kriteria_id_unique');
+
+            $table->foreign('kriteria_id')->references('id')->on('kriteria')->onDelete('cascade');
         });
 
         DB::statement('ALTER TABLE subkriteria ADD CONSTRAINT check_nilai_value CHECK (nilai >= 1 AND nilai <= 5);');
@@ -34,6 +36,7 @@ class CreateSubkriteriaTable extends Migration
      */
     public function down()
     {
+        Schema::dropConstrainedForeignId('kriteria_id');
         Schema::dropIfExists('subkriteria');
     }
 }

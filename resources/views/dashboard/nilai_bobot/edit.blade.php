@@ -14,7 +14,7 @@
   <section class="header-menu">
     <div class="card m-0 border border-bottom-0 shadow-none">
       <div class="card-body d-flex align-items-center justify-content-between">
-        <p class="m-0">Halaman Ubah Nilai Bobot</p>
+        <p class="m-0">Ubah Nilai Bobot</p>
         <div>
           <a href="{{ route('nilai-bobot.index') }}"><button class="btn btn-secondary">Kembali</button></a>
         </div>
@@ -37,8 +37,10 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="alternatif">Alternatif</label>
-                        <input type="text" id="alternatif"
-                          class="form-control @error('alternatif') is-invalid @enderror" name="alternatif" readonly
+                        <input type="hidden" name="alternatif" id="alternatif"
+                          value="{{ $selectedAlternatif[0]->alternatif_id }}">
+                        <input type="text" id="alternatif_view"
+                          class="form-control @error('alternatif') is-invalid @enderror" name="alternatif_view" readonly
                           value="{{ ucwords($selectedAlternatif[0]->name_saham) }} ({{ strtoupper($selectedAlternatif[0]->code_saham) }})">
                         @error('alternatif')
                           @include('layouts.partial.invalid-form', ['message' => $message])

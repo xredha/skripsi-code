@@ -3,14 +3,14 @@
 @section('page-title', 'User Edit')
 
 @section('title')
-  <h4>Alternatif</h4>
+  <h4>User</h4>
 @endsection
 
 @section('content')
   <section class="header-menu">
     <div class="card m-0 border border-bottom-0 shadow-none">
       <div class="card-body d-flex align-items-center justify-content-between">
-        <p class="m-0">Ubah Alternatif</p>
+        <p class="m-0">Ubah User</p>
         <a href="{{ route('user.index') }}"><button class="btn btn-secondary">Kembali</button></a>
       </div>
     </div>

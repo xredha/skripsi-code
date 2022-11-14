@@ -69,8 +69,10 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     Route::prefix('nilai-bobot')->group(function() {
         Route::get('/', [NilaiBobotController::class, 'index'])->name('nilai-bobot.index');
-        Route::get('/create', [NilaiBobotController::class, 'create'])->name('nilai-bobot.create');
-        Route::post('/', [NilaiBobotController::class, 'store'])->name('nilai-bobot.store');
+        Route::get('/create_all', [NilaiBobotController::class, 'create_all'])->name('nilai-bobot.create_all');
+        Route::post('/', [NilaiBobotController::class, 'store_all'])->name('nilai-bobot.store_all');
+        Route::get('/create_single', [NilaiBobotController::class, 'create_single'])->name('nilai-bobot.create_single');
+        // Route::post('/', [NilaiBobotController::class, 'store_single'])->name('nilai-bobot.store_single');
         Route::get('/{alternatif_id}/edit', [NilaiBobotController::class, 'edit'])->name('nilai-bobot.edit');
         Route::put('/{alternatif_id}', [NilaiBobotController::class, 'update'])->name('nilai-bobot.update');
     });

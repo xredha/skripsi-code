@@ -11,7 +11,7 @@
     <div class="card m-0 border shadow-none">
       <div class="card-body d-flex align-items-center justify-content-between">
         <p class="m-0">Hasil Perangkingan</p>
-        <a href="{{ route('wp.hasil') }}"><button class="btn btn-success">Lihat S dan V</button></a>
+        <a href="{{ route('wp.index') }}"><button class="btn btn-success">Lihat S dan V</button></a>
       </div>
     </div>
   </section>

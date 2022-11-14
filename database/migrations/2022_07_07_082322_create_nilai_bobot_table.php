@@ -16,11 +16,14 @@ class CreateNilaiBobotTable extends Migration
         Schema::create('nilai_bobot', function (Blueprint $table) {
             $table->id();
             $table->float('nilai');
-            $table->integer('kriteria_id');
-            $table->integer('alternatif_id');
+            $table->unsignedBigInteger('kriteria_id');
+            $table->unsignedBigInteger('alternatif_id');
             $table->timestamps();
 
             $table->unique(['kriteria_id', 'alternatif_id'], 'kriteria_id_alternatif_id_unique');
+
+            $table->foreign('kriteria_id')->references('id')->on('kriteria')->onDelete('cascade');
+            $table->foreign('alternatif_id')->references('id')->on('alternatif')->onDelete('cascade');
         });
     }
 
@@ -31,6 +34,8 @@ class CreateNilaiBobotTable extends Migration
      */
     public function down()
     {
+        Schema::dropConstrainedForeignId('kriteria_id');
+        Schema::dropConstrainedForeignId('alternatif_id');
         Schema::dropIfExists('nilai_bobot');
     }
 }

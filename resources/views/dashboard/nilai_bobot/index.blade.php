@@ -16,7 +16,7 @@
       <div class="card-body d-flex align-items-center justify-content-between">
         <p class="m-0">Halaman Nilai Bobot</p>
         <div>
-          <a href="{{ route('nilai-bobot.create') }}"><button class="btn btn-success">Tambah Nilai Bobot</button></a>
+          <a href="{{ route('nilai-bobot.create_all') }}"><button class="btn btn-success">Tambah Nilai Bobot</button></a>
           <a href="{{ route('saw.index') }}"><button class="btn btn-warning">Metode SAW <i
                 class="badge-circle badge-circle-light-secondary font-medium-1"
                 data-feather="arrow-right"></i></button></a>
@@ -44,18 +44,18 @@
           </tr>
         </thead>
         <tbody class="bg-white">
-          @foreach ($nilaiBobotGroupByAlternatifId as $alternatif)
+          @foreach ($allDataProcessed as $item)
             <tr>
-              <td>{{ $alternatif->name_saham }} ({{ $alternatif->code_saham }})</td>
-              @foreach ($allKriteria as $kriteria)
-                @foreach ($allNilaiBobot as $nilaiBobot)
-                  @if ($alternatif->id == $nilaiBobot->alternatif_id && $kriteria->id == $nilaiBobot->kriteria_id)
-                    <td>{{ $nilaiBobot->nilai }}</td>
-                  @endif
-                @endforeach
-              @endforeach
+              <td>{{ $item->name_saham }} ({{ $item->code_saham }})</td>
+              @for ($i = 0; $i < count($allKriteria); $i++)
+                @if (is_string($item->dataKriteria[$i]['nilai']))
+                  <td class="text-danger"><i>{{ $item->dataKriteria[$i]['nilai'] }}</i></td>
+                @else
+                  <td>{{ $item->dataKriteria[$i]['nilai'] }}</td>
+                @endif
+              @endfor
               <td>
-                <a href="{{ route('nilai-bobot.edit', ['alternatif_id' => $alternatif->id]) }}" class="me-3">
+                <a href="{{ route('nilai-bobot.edit', ['alternatif_id' => $item->alternatif_id]) }}" class="me-3">
                   <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="edit"></i>Ubah
                 </a>
               </td>

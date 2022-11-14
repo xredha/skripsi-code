@@ -14,27 +14,21 @@ class NilaiBobotController extends Controller
     public function index()
     {
         $allKriteria = Kriteria::all();
-        $allNilaiBobot = NilaiBobot::all();
-        $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
-            ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
-            ->select('alternatif.id', 'alternatif.code_saham', 'alternatif.name_saham')
-            ->orderBy('alternatif.code')
-            ->groupBy('alternatif.id')
-            ->get();
+        $allDataProcessed = $this->process_index_data();
 
-        return view('dashboard.nilai_bobot.index', compact('allKriteria', 'allNilaiBobot', 'nilaiBobotGroupByAlternatifId'));
+        return view('dashboard.nilai_bobot.index', compact('allDataProcessed', 'allKriteria'));
     }
 
-    public function create()
+    public function create_all()
     {
         $allKriteria = Kriteria::all();
         $allSubkriteria = Subkriteria::all();
         $allAlternatif = Alternatif::all();
 
-        return view('dashboard.nilai_bobot.create', compact('allKriteria', 'allSubkriteria', 'allAlternatif'));
+        return view('dashboard.nilai_bobot.create_all', compact('allKriteria', 'allSubkriteria', 'allAlternatif'));
     }
 
-    public function store(Request $request)
+    public function store_all(Request $request)
     {
         $this->validator($request);
 
@@ -53,6 +47,11 @@ class NilaiBobotController extends Controller
             ]);
     }
 
+    public function create_single()
+    {
+        return view('dashboard.nilai_bobot.create_single');
+    }
+
     public function edit($alternatifId)
     {
         $selectedAlternatif = DB::table('nilai_bobot')
@@ -63,7 +62,6 @@ class NilaiBobotController extends Controller
             ->where('nilai_bobot.alternatif_id', '=', $alternatifId)
             ->get();
         $allSubkriteria = Subkriteria::all();
-        // dd($selectedAlternatif);
 
         return view('dashboard.nilai_bobot.edit', compact('selectedAlternatif', 'allSubkriteria'));
     }
@@ -100,5 +98,54 @@ class NilaiBobotController extends Controller
             'nilai' => ['required', 'array'],
             'nilai.*' => ['required', 'numeric', 'between:1,5'],
         ]);
+    }
+
+    protected function process_index_data()
+    {
+        $result = [];
+        $allKriteria = Kriteria::all();
+        $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
+            ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
+            ->select('alternatif_id', 'code', 'code_saham', 'name_saham')
+            ->orderBy('alternatif.code')
+            ->groupBy('alternatif.id')
+            ->get();
+        
+        // Array For Compare to Data Nilai Bobot
+        $arrayKriteriaIdFromKriteria = [];
+        foreach($allKriteria as $item) {
+            $arrayKriteriaIdFromKriteria[] = $item->id;
+        }
+
+        foreach ($nilaiBobotGroupByAlternatifId as $item) {
+            $dataKriteria = [];
+
+            $selectedNilaiBobot = DB::table('nilai_bobot')
+                ->where('alternatif_id', '=', $item->alternatif_id)
+                ->orderBy('kriteria_id')
+                ->get();
+
+            // Array for Compare to Data Kriteria ID
+            $arrayKriteriaIdFromSelectedNilaiBobot = [];
+            foreach ($selectedNilaiBobot as $itemKriteria) {
+                $arrayKriteriaIdFromSelectedNilaiBobot[] = $itemKriteria->kriteria_id;
+                $dataKriteria[] = ['kriteria_id' => $itemKriteria->kriteria_id, 'nilai' => $itemKriteria->nilai];
+            }
+
+            // Comparing Data Kriteria ID & Nilai Bobot
+            $emptyKriteriaId = array_diff($arrayKriteriaIdFromKriteria, $arrayKriteriaIdFromSelectedNilaiBobot);
+            foreach($emptyKriteriaId as $kriteriaId) {
+                $dataKriteria[] = ['kriteria_id' => $kriteriaId, 'nilai' => 'Empty'];
+            }
+
+            // Sorting Multidimensional Array By Kriteria ID
+            $selectedSorting = array_column($dataKriteria, 'kriteria_id');
+            array_multisort($selectedSorting, SORT_ASC, $dataKriteria);
+
+            $item->dataKriteria = $dataKriteria;
+            $result[] = $item;
+        }
+
+        return $result;
     }
 }
