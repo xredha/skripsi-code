@@ -16,7 +16,7 @@
               (SAW)</b> dan
             <b><i class="custom-italic">Weighted Product</i> (WP)</b>
           </h4>
-          <div>
+          <div class="menu-jumbotron">
             <a href="#menu-content"><button class="btn btn-primary">Deskripsi</button></a>
             <a href="{{ route('dashboard.index') }}"><button class="btn btn-success ms-3">Menuju Perhitungan</button></a>
           </div>
@@ -28,26 +28,26 @@
     <div class="container">
       {{-- Menu --}}
       <h1 class="text-center my-4">Menu</h1>
-      <div class="d-flex justify-content-between align-items-center">
-        <button class="card border" onclick="selectedMenu(0)">
+      <div class="menu-button-container">
+        <button class="card border d-flex justify-content-center align-items-center" onclick="selectedMenu(0)">
           <div class="card-body custom-card-homepage">
             <img src="{{ asset('images/homepage/icons/spk.png') }}" alt="Logo SPK">
             <p class="text-center mt-3">Sistem Pendukung Keputusan</p>
           </div>
         </button>
-        <button class="card border" onclick="selectedMenu(1)">
+        <button class="card border d-flex justify-content-center align-items-center" onclick="selectedMenu(1)">
           <div class="card-body custom-card-homepage">
             <img src="{{ asset('images/homepage/icons/method.png') }}" alt="Logo Metode">
             <p class="text-center mt-3">Metode SAW dan WP</p>
           </div>
         </button>
-        <button class="card border" onclick="selectedMenu(2)">
+        <button class="card border d-flex justify-content-center align-items-center" onclick="selectedMenu(2)">
           <div class="card-body custom-card-homepage">
             <img src="{{ asset('images/homepage/icons/icon-saham.png') }}" alt="Logo Saham dan Saham Syari'ah">
             <p class="text-center mt-3">Saham dan Saham Syari'ah</p>
           </div>
         </button>
-        <button class="card border" onclick="selectedMenu(3)">
+        <button class="card border d-flex justify-content-center align-items-center" onclick="selectedMenu(3)">
           <div class="card-body custom-card-homepage">
             <img src="{{ asset('images/homepage/icons/jii-70.png') }}" alt="Logo JII 70">
             <p class="text-center mt-3">Saham Syari'ah JII 70</p>

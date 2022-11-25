@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
       <li class="dropdown">
-        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user d-flex justify-content-center align-items-center">
           <div class="avatar me-1">
             <img src="{{ asset('images/icon-person.png') }}" alt="Logo Person" srcset="">
           </div>

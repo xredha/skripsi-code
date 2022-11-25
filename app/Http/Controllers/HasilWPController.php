@@ -32,12 +32,12 @@ class HasilWPController extends Controller
         foreach ($allBobot as $item) {
             if ($item->type == 'cost') {
                 $resultBobot = ($item->bobot / $totalBobot) * -1;
-                $result[] = ['name' => $item->name, 'type' => $item->type, 'bobot' => $item->bobot, 'bobot_ternormalisasi' => $resultBobot];
+                $result[] = ['name' => $item->name, 'description' => $item->description, 'type' => $item->type, 'bobot' => $item->bobot, 'bobot_ternormalisasi' => $resultBobot];
             }
 
             if ($item->type == 'benefit') {
                 $resultBobot = $item->bobot / $totalBobot;
-                $result[] = ['name' => $item->name, 'type' => $item->type, 'bobot' => $item->bobot, 'bobot_ternormalisasi' => $resultBobot];
+                $result[] = ['name' => $item->name, 'description' => $item->description, 'type' => $item->type, 'bobot' => $item->bobot, 'bobot_ternormalisasi' => $resultBobot];
             }
         }
 
@@ -48,7 +48,7 @@ class HasilWPController extends Controller
     {
         $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
             ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
-            ->select('nilai_bobot.alternatif_id', 'alternatif.code', 'alternatif.code_saham')
+            ->select('nilai_bobot.alternatif_id', 'alternatif.code', 'alternatif.code_saham', 'alternatif.name_saham')
             ->orderBy('nilai_bobot.alternatif_id')
             ->groupBy('nilai_bobot.alternatif_id')
             ->get();
@@ -64,7 +64,7 @@ class HasilWPController extends Controller
                 $vektorS *= pow($selectedNilaiBobot[$i]->nilai, $bobotTernormalisasi[$i]['bobot_ternormalisasi']);
             }
 
-            $result[] = ['alternatif_code' => $item->code, 'code_saham' => $item->code_saham, 'vektor_s' => $vektorS];
+            $result[] = ['alternatif_code' => $item->code, 'code_saham' => $item->code_saham, 'name_saham' => $item->name_saham, 'vektor_s' => $vektorS];
         }
 
         return $result;
@@ -78,7 +78,7 @@ class HasilWPController extends Controller
 
         foreach ($vektorS as $item) {
             $vektorV = $item['vektor_s'] / $totalVektorS;
-            $result[] = ['alternatif_code' => $item['alternatif_code'], 'code_saham' => $item['code_saham'], 'vektor_v' => $vektorV];
+            $result[] = ['alternatif_code' => $item['alternatif_code'], 'code_saham' => $item['code_saham'], 'name_saham' => $item['name_saham'], 'vektor_v' => $vektorV];
         }
 
         return $result;

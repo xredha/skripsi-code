@@ -34,7 +34,7 @@
             @foreach ($bobotTernormalisasi as $index=>$item)
               <tr>
                 <td class="text-center">{{ ($index + 1) }}</td>
-                <td class="text-center">{{ strtoupper($item['name']) }}</td>
+                <td class="text-center">{{ ucwords($item['description']) }} ({{ strtoupper($item['name']) }})</td>
                 <td class="text-center">{{ $item['bobot'] }}</td>
                 <td class="text-center">{{ ucwords($item['type']) }}</td>
                 <td class="text-center">{{ round($item['bobot_ternormalisasi'], 5) }}</td>
