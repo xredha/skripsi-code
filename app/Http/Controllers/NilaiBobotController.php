@@ -102,6 +102,7 @@ class NilaiBobotController extends Controller
 
     protected function process_index_data()
     {
+        $EMPTY_VALUE = 'Empty';
         $result = [];
         $allKriteria = Kriteria::all();
         $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
@@ -135,7 +136,7 @@ class NilaiBobotController extends Controller
             // Comparing Data Kriteria ID & Nilai Bobot
             $emptyKriteriaId = array_diff($arrayKriteriaIdFromKriteria, $arrayKriteriaIdFromSelectedNilaiBobot);
             foreach($emptyKriteriaId as $kriteriaId) {
-                $dataKriteria[] = ['kriteria_id' => $kriteriaId, 'nilai' => 'Empty'];
+                $dataKriteria[] = ['kriteria_id' => $kriteriaId, 'nilai' => $EMPTY_VALUE];
             }
 
             // Sorting Multidimensional Array By Kriteria ID

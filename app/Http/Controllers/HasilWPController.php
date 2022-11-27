@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,18 +10,28 @@ class HasilWPController extends Controller
 {
     public function index()
     {
-        $bobotTernormalisasi = $this->bobot_ternormalisasi();
-        $vektorS = $this->vektor_s();
-        $vektorV = $this->vektor_v();
+        $checkHasEmptyData = $this->check_nilai_bobot_has_empty_data();
+        $bobotTernormalisasi = [];
+        $vektorS = [];
+        $vektorV = [];
+        if (!$checkHasEmptyData) {
+            $bobotTernormalisasi = $this->bobot_ternormalisasi();
+            $vektorS = $this->vektor_s();
+            $vektorV = $this->vektor_v();
+        }
 
-        return view('dashboard.hasil_wp.index', compact(['bobotTernormalisasi', 'vektorS', 'vektorV']));
+        return view('dashboard.hasil_wp.index', compact(['bobotTernormalisasi', 'vektorS', 'vektorV', 'checkHasEmptyData']));
     }
 
     public function hasil()
     {
-        $hasilPerankingan = $this->sorting_vektor_v();
+        $checkHasEmptyData = $this->check_nilai_bobot_has_empty_data();
+        $hasilPerankingan = [];
+        if (!$checkHasEmptyData) {
+            $hasilPerankingan = $this->sorting_vektor_v();
+        }
 
-        return view('dashboard.hasil_wp.hasil', compact(['hasilPerankingan']));
+        return view('dashboard.hasil_wp.hasil', compact(['hasilPerankingan', 'checkHasEmptyData']));
     }
 
     protected function bobot_ternormalisasi()
@@ -91,5 +102,51 @@ class HasilWPController extends Controller
         array_multisort($selectedSorting, SORT_DESC, $vektorV);
 
         return $vektorV;
+    }
+
+    // Get From NilaiBobotController with some Edit
+    protected function check_nilai_bobot_has_empty_data()
+    {
+        $condition = false;
+        $EMPTY_VALUE = 'Empty';
+        $allKriteria = Kriteria::all();
+        $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
+            ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
+            ->select('alternatif_id', 'code', 'code_saham', 'name_saham')
+            ->orderBy('alternatif.code')
+            ->groupBy('alternatif.id')
+            ->get();
+        
+        // Array For Compare to Data Nilai Bobot
+        $arrayKriteriaIdFromKriteria = [];
+        foreach($allKriteria as $item) {
+            $arrayKriteriaIdFromKriteria[] = $item->id;
+        }
+
+        foreach ($nilaiBobotGroupByAlternatifId as $item) {
+            $dataKriteria = [];
+
+            $selectedNilaiBobot = DB::table('nilai_bobot')
+                ->where('alternatif_id', '=', $item->alternatif_id)
+                ->orderBy('kriteria_id')
+                ->get();
+
+            // Array for Compare to Data Kriteria ID
+            $arrayKriteriaIdFromSelectedNilaiBobot = [];
+            foreach ($selectedNilaiBobot as $itemKriteria) {
+                $arrayKriteriaIdFromSelectedNilaiBobot[] = $itemKriteria->kriteria_id;
+                $dataKriteria[] = ['kriteria_id' => $itemKriteria->kriteria_id, 'nilai' => $itemKriteria->nilai];
+            }
+
+            // Comparing Data Kriteria ID & Nilai Bobot
+            $emptyKriteriaId = array_diff($arrayKriteriaIdFromKriteria, $arrayKriteriaIdFromSelectedNilaiBobot);
+            foreach($emptyKriteriaId as $kriteriaId) {
+                $dataKriteria[] = ['kriteria_id' => $kriteriaId, 'nilai' => $EMPTY_VALUE];
+                $condition = true;
+                break;
+            }
+        }
+
+        return $condition;
     }
 }

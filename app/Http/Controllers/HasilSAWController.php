@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,24 +10,34 @@ class HasilSAWController extends Controller
 {
     public function index()
     {
-        $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
+        $checkHasEmptyData = $this->check_nilai_bobot_has_empty_data();
+        $nilaiBobotGroupByAlternatifId = [];
+        $persentaseBobot = [];
+        $matrixTernormalisasi = [];
+        if (!$checkHasEmptyData) {
+            $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
             ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
             ->select('nilai_bobot.alternatif_id', 'alternatif.code', 'alternatif.code_saham')
             ->orderBy('nilai_bobot.alternatif_id')
             ->groupBy('nilai_bobot.alternatif_id')
             ->get();
-        $persentaseBobot = $this->persentase_bobot();
-        $matrixTernormalisasi = $this->matrix_ternormalisasi($nilaiBobotGroupByAlternatifId);
+            $persentaseBobot = $this->persentase_bobot();
+            $matrixTernormalisasi = $this->matrix_ternormalisasi($nilaiBobotGroupByAlternatifId);
+        }
         // dd($matrixTernormalisasi);
 
-        return view('dashboard.hasil_saw.index', compact(['nilaiBobotGroupByAlternatifId', 'persentaseBobot', 'matrixTernormalisasi']));
+        return view('dashboard.hasil_saw.index', compact(['nilaiBobotGroupByAlternatifId', 'persentaseBobot', 'matrixTernormalisasi', 'checkHasEmptyData']));
     }
 
     public function hasil()
     {
-        $hasilPerankingan = $this->sorting_vektor_v();
+        $checkHasEmptyData = $this->check_nilai_bobot_has_empty_data();
+        $hasilPerankingan = [];
+        if (!$checkHasEmptyData) {
+            $hasilPerankingan = $this->sorting_vektor_v();
+        }
 
-        return view('dashboard.hasil_saw.hasil', compact(['hasilPerankingan']));
+        return view('dashboard.hasil_saw.hasil', compact(['hasilPerankingan', 'checkHasEmptyData']));
     }
 
     protected function persentase_bobot()
@@ -121,5 +132,51 @@ class HasilSAWController extends Controller
         array_multisort($selectedSorting, SORT_DESC, $result);
 
         return $result;
+    }
+
+    // Get From NilaiBobotController with some Edit
+    protected function check_nilai_bobot_has_empty_data()
+    {
+        $condition = false;
+        $EMPTY_VALUE = 'Empty';
+        $allKriteria = Kriteria::all();
+        $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
+            ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
+            ->select('alternatif_id', 'code', 'code_saham', 'name_saham')
+            ->orderBy('alternatif.code')
+            ->groupBy('alternatif.id')
+            ->get();
+        
+        // Array For Compare to Data Nilai Bobot
+        $arrayKriteriaIdFromKriteria = [];
+        foreach($allKriteria as $item) {
+            $arrayKriteriaIdFromKriteria[] = $item->id;
+        }
+
+        foreach ($nilaiBobotGroupByAlternatifId as $item) {
+            $dataKriteria = [];
+
+            $selectedNilaiBobot = DB::table('nilai_bobot')
+                ->where('alternatif_id', '=', $item->alternatif_id)
+                ->orderBy('kriteria_id')
+                ->get();
+
+            // Array for Compare to Data Kriteria ID
+            $arrayKriteriaIdFromSelectedNilaiBobot = [];
+            foreach ($selectedNilaiBobot as $itemKriteria) {
+                $arrayKriteriaIdFromSelectedNilaiBobot[] = $itemKriteria->kriteria_id;
+                $dataKriteria[] = ['kriteria_id' => $itemKriteria->kriteria_id, 'nilai' => $itemKriteria->nilai];
+            }
+
+            // Comparing Data Kriteria ID & Nilai Bobot
+            $emptyKriteriaId = array_diff($arrayKriteriaIdFromKriteria, $arrayKriteriaIdFromSelectedNilaiBobot);
+            foreach($emptyKriteriaId as $kriteriaId) {
+                $dataKriteria[] = ['kriteria_id' => $kriteriaId, 'nilai' => $EMPTY_VALUE];
+                $condition = true;
+                break;
+            }
+        }
+
+        return $condition;
     }
 }
