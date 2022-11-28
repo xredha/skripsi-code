@@ -4,22 +4,20 @@
 
 @section('content')
   <section id="homepage-content">
-    <div class="jumbotron">
-      <div class="jumbotron-image" style="background-image: url('{{ asset('images/jumbotron-image.jpg') }}')">
-        <div class="content-jumbotron-image">
-          <h1 class="text-center mb-3"><b>Selamat Datang di Sistem Pendukung Keputusan Saham Syari'ah JII 70</b>
-          </h1>
-          <h4 class="text-center mb-5"><b>Sistem Pendukung Keputusan</b> yang dibangun agar dapat melakukan perhitungan dan
-            rekomendasi <b>Saham Syari'ah Jakarta Islamic Index 70 (JII 70)</b> dengan menggunakan metode <b><i
-                class="custom-italic">Simple Additive
-                Weighting</i>
-              (SAW)</b> dan
-            <b><i class="custom-italic">Weighted Product</i> (WP)</b>
-          </h4>
-          <div class="menu-jumbotron">
-            <a href="#menu-content"><button class="btn btn-primary">Deskripsi</button></a>
-            <a href="{{ route('dashboard.index') }}"><button class="btn btn-success ms-3">Menuju Perhitungan</button></a>
-          </div>
+    <div class="jumbotron-container">
+      <div class="jumbotron-image" style="background-image: url('{{ asset('images/jumbotron-image.jpg') }}');"></div>
+      <div class="jumbotron-cover"></div>
+      <div class="jumbotron-content">
+        <h1 class="text-center mb-3"><b>Selamat Datang di Sistem Pendukung Keputusan Saham Syari'ah JII 70</b></h1>
+        <h4 class="text-center mb-5">
+          <b>Sistem Pendukung Keputusan</b> yang dibangun agar dapat melakukan perhitungan dan rekomendasi 
+          <b>Saham Syari'ah Jakarta Islamic Index 70 (JII 70)</b> 
+          dengan menggunakan metode <b><i class="custom-italic">Simple Additive Weighting</i>(SAW)</b> dan
+          <b><i class="custom-italic">Weighted Product</i> (WP)</b>
+        </h4>
+        <div class="jumbotron-menu">
+          <a href="#menu-content"><button class="btn btn-primary">Deskripsi</button></a>
+          <a href="{{ route('dashboard.index') }}"><button class="btn btn-success ms-3">Menuju Perhitungan</button></a>
         </div>
       </div>
     </div>

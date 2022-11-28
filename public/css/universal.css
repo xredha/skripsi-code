@@ -1,5 +1,7 @@
 #homepage-content {
   min-height: 650px;
+  height: 650px;
+  position: relative;
 }
 
 #dashboard-content {
@@ -7,66 +9,51 @@
   height: calc(100% - 150px);
 }
 
-.header-homepage-mobile {
-  display: none;
-}
-
-.jumbotron {
-  width: 100%;
-  height: 650px;
-  display: flex;
-  flex-wrap: nowrap;
+.jumbotron-container {
+  height: 100%;
+  position: relative;
 }
 
 .jumbotron-image {
-  /* layout */
-  height: 650px;
-  min-width: 100vh;
-  flex: 1;
-  display: flex;
-  position: relative;
-  /* content styling OPTIONAL*/
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  /* background styling */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 
-.jumbotron-image::before {
-  content: "";
-  display: block;
-  -webkit-filter: blur(1px) brightness(0.5);
-  -moz-filter: blur(1px) brightness(0.5);
-  -ms-filter: blur(1px) brightness(0.5);
-  -o-filter: blur(1px) brightness(0.5);
-  filter: blur(1px) brightness(0.5);
+.jumbotron-cover {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
   top: 0;
-  background: inherit;
-  z-index: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
-.content-jumbotron-image {
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 6.5rem;
+.jumbotron-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 5.5rem;
 }
 
-.content-jumbotron-image h1 {
+.jumbotron-content h1 {
   color: #E9ECEF;
 }
 
-.content-jumbotron-image h4 {
+.jumbotron-content h4 {
   color: #ADB5BD;
+}
+
+.jumbotron-menu {
+  display: flex;
+  justify-content: center;
 }
 
 .custom-italic {
@@ -82,7 +69,6 @@
 .custom-card-homepage {
   width: 100%;
   max-width: 180px;
-  /* margin: 0 1rem; */
   padding: 1rem !important;
   display: flex;
   flex-wrap: wrap;
@@ -128,6 +114,10 @@
   height: auto;
 }
 
+.header-homepage-mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 991px) {
   .header-homepage-desktop {
     display: none;
@@ -139,12 +129,8 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .jumbotron-image {
-    padding: 1rem;
-  }
-
-  .content-jumbotron-image {
-    padding: 1rem;
+  .jumbotron-content {
+    padding: 3rem;
   }
 
   .menu-button-container {
@@ -152,16 +138,22 @@
   }
 }
 
-@media only screen and (max-width: 375px) {
-  .menu-jumbotron {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+@media only screen and (max-width: 425px) {
+  #homepage-content {
+    height: 750px;
   }
 
-  .menu-jumbotron .btn-success {
-    margin: 0 !important;
+  .jumbotron-content {
+    padding: 1rem;
+  }
+
+  .jumbotron-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jumbotron-menu .btn-success {
+    margin-left: 0 !important;
+    margin-top: 10px;
   }
 }

@@ -16,11 +16,11 @@ class HasilSAWController extends Controller
         $matrixTernormalisasi = [];
         if (!$checkHasEmptyData) {
             $nilaiBobotGroupByAlternatifId = DB::table('nilai_bobot')
-            ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
-            ->select('nilai_bobot.alternatif_id', 'alternatif.code', 'alternatif.code_saham')
-            ->orderBy('nilai_bobot.alternatif_id')
-            ->groupBy('nilai_bobot.alternatif_id')
-            ->get();
+                ->join('alternatif', 'nilai_bobot.alternatif_id', '=', 'alternatif.id')
+                ->select('nilai_bobot.alternatif_id', 'alternatif.code', 'alternatif.code_saham')
+                ->orderBy('nilai_bobot.alternatif_id')
+                ->groupBy('nilai_bobot.alternatif_id')
+                ->get();
             $persentaseBobot = $this->persentase_bobot();
             $matrixTernormalisasi = $this->matrix_ternormalisasi($nilaiBobotGroupByAlternatifId);
         }
