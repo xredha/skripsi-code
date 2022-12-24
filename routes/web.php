@@ -39,6 +39,7 @@ Route::get('/', [HomeController::class, 'index'])->name('homepage.index');
 
 Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/petunjuk', [DashboardController::class, 'petunjuk'])->name('dashboard.petunjuk');
 
     Route::prefix('kriteria')->group(function() {
         Route::get('/', [KriteriaController::class, 'index'])->name('kriteria.index');

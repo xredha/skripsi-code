@@ -10,8 +10,6 @@ class SubkriteriaController extends Controller
 {
     public function index()
     {
-        $this->authorize('is_staff_or_admin');
-
         $allSubkriteria = DB::table('subkriteria')
                             ->join('kriteria', 'subkriteria.kriteria_id', '=', 'kriteria.id')
                             ->select('subkriteria.*', 'kriteria.name')

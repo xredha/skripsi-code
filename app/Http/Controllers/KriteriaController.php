@@ -10,8 +10,6 @@ class KriteriaController extends Controller
 {
     public function index()
     {
-        $this->authorize('is_staff_or_admin');
-
         $allKriteria = Kriteria::all();
         return view('dashboard.kriteria.index', compact('allKriteria'));
     }

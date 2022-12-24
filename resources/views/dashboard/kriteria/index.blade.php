@@ -16,7 +16,9 @@
       <div class="card-body d-flex align-items-center justify-content-between">
         <p class="m-0">Halaman Kriteria</p>
         <div>
+          @can('is_staff_or_admin')
           <a href="{{ route('kriteria.create') }}"><button class="btn btn-success">Tambah Kriteria</button></a>
+          @endcan
           <a href="{{ route('subkriteria.index') }}"><button class="btn btn-warning">Lanjut Subkriteria <i
                 class="badge-circle badge-circle-light-secondary font-medium-1"
                 data-feather="arrow-right"></i></button></a>
@@ -34,7 +36,9 @@
           <th class="text-center">Keterangan</th>
           <th class="text-center">Tipe</th>
           <th class="text-center">Bobot</th>
+          @can('is_staff_or_admin')
           <th class="text-center">Aksi</th>
+          @endcan
         </tr>
       </thead>
       <tbody class="bg-white">
@@ -45,6 +49,7 @@
             <td>{{ ucwords($kriteria->description) }}</td>
             <td>{{ ucwords($kriteria->type) }}</td>
             <td>{{ $kriteria->bobot }}</td>
+            @can('is_staff_or_admin')
             <td>
               <div class="d-flex justify-content-around">
                 {{-- Update --}}
@@ -63,6 +68,7 @@
                 </form>
               </div>
             </td>
+            @endcan
           </tr>
         @endforeach
       </tbody>

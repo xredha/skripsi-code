@@ -16,7 +16,9 @@
       <div class="card-body d-flex align-items-center justify-content-between">
         <p class="m-0">Halaman Subkriteria</p>
         <div>
+          @can('is_staff_or_admin')
           <a href="{{ route('subkriteria.create') }}"><button class="btn btn-success">Tambah Subkriteria</button></a>
+          @endcan
           <a href="{{ route('alternatif.index') }}"><button class="btn btn-warning">Lanjut Alternatif <i
             class="badge-circle badge-circle-light-secondary font-medium-1"
             data-feather="arrow-right"></i></button></a>
@@ -32,7 +34,9 @@
           <th class="text-center">Kriteria</th>
           <th class="text-center">Range</th>
           <th class="text-center">Nilai</th>
+          @can('is_staff_or_admin')
           <th class="text-center">Aksi</th>
+          @endcan
         </tr>
       </thead>
       <tbody class="bg-white">
@@ -41,6 +45,7 @@
             <td>{{ strtoupper($subkriteria->name) }}</td>
             <td>{{ $subkriteria->range }}</td>
             <td>{{ $subkriteria->nilai }}</td>
+            @can('is_staff_or_admin')
             <td>
               <div class="d-flex justify-content-around">
                 <a href="{{ route('subkriteria.edit', $subkriteria->kriteria_id) }}" class="me-3">
@@ -49,6 +54,7 @@
                 </a>
               </div>
             </td>
+            @endcan
           </tr>
         @endforeach
       </tbody>

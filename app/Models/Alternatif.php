@@ -17,14 +17,4 @@ class Alternatif extends Model
     {
         return $this->hasMany(NilaiBobot::class);
     }
-
-    public function hasilSAW()
-    {
-        return $this->hasMany(HasilSAW::class);
-    }
-
-    public function hasilWP()
-    {
-        return $this->hasMany(HasilWP::class);
-    }
 }
